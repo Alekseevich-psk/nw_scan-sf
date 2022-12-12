@@ -10,6 +10,14 @@
     letter-spacing: 0.01em;
     transition: $tr;
 
+    &.disabled {
+        background-color: #b1bbf8;
+
+        &:hover, &:active {
+            background-color: #b1bbf8;
+        }
+    }
+
     &:hover {
         background-color: $activeHover;
     }

@@ -1,18 +1,58 @@
-<setion class="auth">
+<section class="auth">
     <div class="container">
         <div class="auth__wrapper">
             <div class="auth__inner">
-                <h1 class="auth__m-title m-title">Для оформления подписки на тариф, необходимо авторизоваться.</h1>
-                <div class="auth__bg"></div>
+                <h1 class="auth__s-title s-title">Для оформления подписки на тариф, необходимо авторизоваться.</h1>
+                <div class="auth__bg auth__bg--desktop"></div>
             </div>
             <div class="auth__inner">
                 <div class="auth__form form form--auth">
-                    <form class="form__auth-form">
-
+                    <div class="form__wrap-btn-select">
+                        <button class="form__select-form active">Войти</button>
+                        <button class="form__select-form">Зарегистрироваться</button>
+                    </div>
+                    <form class="form__auth">
+                        <div class="form__item">
+                            <label for="email" class="form__label label">Логин или номер телефона:</label>
+                            <input type="text" id="email" name="email" class="form__input input">
+                            <div class="form__error">Введите корректные данные</div>
+                        </div>
+                        <div class="form__item">
+                            <label for="password" class="form__label label">Пароль:</label>
+                            <input type="password" id="password" name="password" class="form__input input">
+                            <div class="form__error">Введите корректные данные</div>
+                        </div>
+                        <div class="form__align">
+                            <input type="submit" class="form__btn btn disabled" disabled value="Войти">
+                            <a href="/" class="form__rem-pass">Восстановить пароль</a>
+                        </div>
+                        <div class="form__enter">
+                            <div class="form__enter-title">Войти через:</div>
+                            <a href="" class="form__enter-ico form__enter-ico--gg"></a>
+                            <a href="" class="form__enter-ico form__enter-ico--fb"></a>
+                            <a href="" class="form__enter-ico form__enter-ico--ya"></a>
+                        </div>
                     </form>
+                    <form class="form__reg active">
+                        <div class="form__item">
+                            <label for="email" class="form__label label">Логин или номер телефона:</label>
+                            <input type="text" id="email" name="email" class="form__input input">
+                            <div class="form__error">Введите корректные данные</div>
+                        </div>
+                        <div class="form__item">
+                            <label for="password" class="form__label label">Пароль:</label>
+                            <input type="password" id="password" name="password" class="form__input input">
+                            <div class="form__error">Введите корректные данные</div>
+                        </div>
+                        <div class="form__align">
+                            <input type="submit" class="form__btn btn disabled" disabled value="Войти">
+                        </div>
+                    </form>
+
                 </div>
-                <div class="auth__form"></div>
+
+                <div class="auth__bg auth__bg--mobile"></div>
             </div>
         </div>
     </div>
-</setion>
+</section>
