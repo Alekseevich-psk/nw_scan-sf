@@ -51,6 +51,42 @@
 
         &-desc {
             opacity: 0.6;
+            margin-bottom: 28px;
+        }
+
+        &-slider {
+            border: 1px solid #029491;
+            border-radius: 0 8px 8px 0;
+            padding: 8px;
+        }
+
+        &-slider-wrap {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &-wrapper {
+            position: relative;
+        }
+
+        &-slide {
+            border-right: 1px solid #029491;
+            font-size: 14px;
+        }
+
+        &-list {
+            min-width: 140px;
+            max-width: 140px;
+            color: $white;
+            padding: 8px 20px;
+            border-radius: 8px 0 0 8px;
+            background-color: #029491;
+        }
+
+        &-date, &-cont {
+            padding-top: 2px;
+            text-align: center;
         }
     }
 
