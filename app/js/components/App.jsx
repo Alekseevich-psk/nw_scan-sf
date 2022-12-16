@@ -1,15 +1,16 @@
 import React from "react";
 
 import { StrictMode } from "react";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./chunks/Header.jsx";
 import Footer from "./chunks/Footer.jsx";
 
-import Main from "./sections/Main.jsx";
-import WhyMe from "./sections/WhyMe.jsx";
-import Tariff from "./sections/Tariff.jsx";
-
+import Index from "./pages/Index.jsx";
+import Auth from "./pages/Auth.jsx";
+import Res from "./pages/Res.jsx";
+import Search from "./pages/Search.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 class App extends React.Component {
 
@@ -20,11 +21,17 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Header />
-                <Main />
-                <WhyMe/>
-                <Tariff/>
-                <Footer />
+
+                <BrowserRouter>
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<Index />} />
+                        <Route path="/search" element={<Search />} />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                    <Footer />
+                </BrowserRouter>
+
             </div>
         );
     }

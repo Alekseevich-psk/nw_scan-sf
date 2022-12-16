@@ -1,4 +1,5 @@
 import React from 'react';
+import { link } from "react-router-dom";
 
 export default function Main() {
     return (
@@ -13,7 +14,7 @@ export default function Main() {
                             Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.
                         </div>
                         <div className="main__align">
-                            <button className="main__btn btn">Запросить данные</button>
+                            {/* <link to="{search}" className="main__btn btn">Запросить данные</link> */}
                         </div>
                     </div>
                     <div className="main__inner main__inner--bg"></div>

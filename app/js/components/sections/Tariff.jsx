@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Tariff() {
     return (
-        <section className="tariff">
+        <section className="tariff" id="tariff">
             <div className="container">
                 <h2 className="why-me__s-title s-title">Наши тарифы</h2>
                 <div className="tariff__wrapper">

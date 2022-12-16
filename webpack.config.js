@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -29,9 +29,13 @@ const config = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "js/bundle.js",
+        publicPath: "/",
     },
     devtool: "source-map",
     mode: "production",
+    devServer: {
+        historyApiFallback: true,
+    },
     optimization: {
         minimize: true,
         minimizer: [
