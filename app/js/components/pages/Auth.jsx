@@ -1,4 +1,6 @@
 import React from "react";
+import LoginForm from "../elements/LoginForm.jsx";
+import RegForm from "../elements/RegForm.jsx";
 
 export default function Auth() {
     return (
@@ -15,46 +17,9 @@ export default function Auth() {
                                 <button className="form__select-form active">Войти</button>
                                 <button className="form__select-form">Зарегистрироваться</button>
                             </div>
-                            <form className="form__auth">
-                                <div className="form__item">
-                                    <label for="email" className="form__label label">Логин или номер телефона:</label>
-                                    <input type="text" id="email" name="email" className="form__input input" />
-                                        <div className="form__error">Введите корректные данные</div>
-                                </div>
-                                <div className="form__item">
-                                    <label for="password" className="form__label label">Пароль:</label>
-                                    <input type="password" id="password" name="password" className="form__input input" />
-                                        <div className="form__error">Введите корректные данные</div>
-                                </div>
-                                <div className="form__align">
-                                    <input type="submit" className="form__btn btn disabled" disabled value="Войти" />
-                                        <a href="/" className="form__rem-pass">Восстановить пароль</a>
-                                </div>
-                                <div className="form__enter">
-                                    <div className="form__enter-title">Войти через:</div>
-                                    <a href="" className="form__enter-ico form__enter-ico--gg"></a>
-                                    <a href="" className="form__enter-ico form__enter-ico--fb"></a>
-                                    <a href="" className="form__enter-ico form__enter-ico--ya"></a>
-                                </div>
-                            </form>
-                            <form className="form__reg active">
-                                <div className="form__item">
-                                    <label for="email" className="form__label label">Логин или номер телефона:</label>
-                                    <input type="text" id="email" name="email" className="form__input input" />
-                                        <div className="form__error">Введите корректные данные</div>
-                                </div>
-                                <div className="form__item">
-                                    <label for="password" className="form__label label">Пароль:</label>
-                                    <input type="password" id="password" name="password" className="form__input input" />
-                                        <div className="form__error">Введите корректные данные</div>
-                                </div>
-                                <div className="form__align">
-                                    <input type="submit" className="form__btn btn disabled" disabled value="Войти" />
-                                </div>
-                            </form>
-
+                            <LoginForm/>
+                            <RegForm/>
                         </div>
-
                         <div className="auth__bg auth__bg--mobile"></div>
                     </div>
                 </div>

@@ -3,8 +3,8 @@ import React from "react";
 import { StrictMode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Header from "./chunks/Header.jsx";
-import Footer from "./chunks/Footer.jsx";
+import Header from "./elements/Header.jsx";
+import Footer from "./elements/Footer.jsx";
 
 import Index from "./pages/Index.jsx";
 import Auth from "./pages/Auth.jsx";
@@ -18,6 +18,18 @@ class App extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        // console.log('test');
+
+        // fetch("https://gateway.scan-interfax.ru/api/v1/account/login")
+        //     .then((response) => {
+        //         return response.json();
+        //     })
+        //     .then((data) => {
+        //         console.log(data);
+        //     });
+    }
+
     render() {
         return (
             <div>
@@ -27,6 +39,8 @@ class App extends React.Component {
                     <Routes>
                         <Route path="/" element={<Index />} />
                         <Route path="/search" element={<Search />} />
+                        <Route path="/auth" element={<Auth />} />
+                        <Route path="/res" element={<Res />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>
                     <Footer />
