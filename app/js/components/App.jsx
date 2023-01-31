@@ -19,15 +19,28 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        // console.log('test');
+        const login = "sf_student1";
+        const password = "Es#m*VvaA7";
 
-        // fetch("https://gateway.scan-interfax.ru/api/v1/account/login")
-        //     .then((response) => {
-        //         return response.json();
-        //     })
-        //     .then((data) => {
-        //         console.log(data);
-        //     });
+        const headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        }
+
+        const params = new URLSearchParams();
+        params.set('login', login);
+        params.set('password', password);
+
+        fetch('https://gateway.scan-interfax.ru/api/v1/account/login', {
+            method: 'POST',
+            header: headers,
+            body: params
+        }).then((response) => {
+            return response.json();
+        })
+            .then((data) => {
+                console.log(data);
+            });
     }
 
     render() {

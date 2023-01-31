@@ -132,4 +132,29 @@
         font-size: 14px;
         padding: 0;
     }
+
+    &__link {
+        color: $black;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &--reg {
+            padding-right: 6px;
+            margin-right: 6px;
+            border-right: 2px solid $black;
+        }
+
+        &--enter {
+            background-color: $active;
+            padding: 4px 12px;
+            color: $white;
+            border-radius: 4px;
+        }
+    }
+
+    .hide {
+        display: none;
+    }
 }
