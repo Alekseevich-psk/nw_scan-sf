@@ -3,6 +3,16 @@
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 
+    &.active {
+        .card__btn {
+            background-color: #D2D2D2;
+        }
+
+        .card__info {
+            display: block;
+        }
+    }
+
     &--beginner {
         border: 1px solid $subActiveTwo;
         .card__header {
@@ -79,6 +89,7 @@
         font-size: 14px;
         display: inline-block;
         margin-right: 0;
+        display: none;
     }
 
     &__price {
