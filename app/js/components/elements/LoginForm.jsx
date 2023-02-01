@@ -8,8 +8,7 @@ class LoginForm extends React.Component {
 
         this.state = {
             inputNameValue: 'sf_student1',
-            inputNamePass: 'Es#m*VvaA7',
-            inputValue: null
+            inputNamePass: 'Es#m*VvaA7'
         }
 
     }
