@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
 
 class Header extends React.Component {
 
@@ -41,14 +41,18 @@ class Header extends React.Component {
                             </div>
                         </div>
                         <div className="header__inner header__inner--user">
-                            <div className="header__user">
+                            <div className={"header__user header__user--auth " + (this.props.authStore.auth ? 'show' : 'hide')}>
                                 <div className="header__user-text">
                                     <div className="header__name">Алексей А.</div>
-                                    <button className="header__btn-out">Выйти</button>
+                                    <a href="/" className="header__btn-out">Выйти</a>
                                 </div>
                                 <div className="header__avatar">
                                     <img src="./images/preview-user.png" alt="" />
                                 </div>
+                            </div>
+                            <div className={"header__user header__user--no-auth " + (this.props.authStore.auth ? 'hide' : 'show')}>
+                                <Link to="/" className="header__link header__link--reg">Регистрация</Link>
+                                <Link to="/auth" className="header__link header__link--enter">Войти</Link>
                             </div>
                         </div>
                     </div>
@@ -58,4 +62,6 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+export default connect(
+    state => ({ authStore: state.authStore })
+)(Header);

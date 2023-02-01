@@ -3,6 +3,8 @@ import React from "react";
 import { StrictMode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { connect } from "react-redux";
+
 import Header from "./elements/Header.jsx";
 import Footer from "./elements/Footer.jsx";
 
@@ -16,6 +18,7 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+
     }
 
     componentDidMount() {
@@ -64,4 +67,19 @@ class App extends React.Component {
     }
 }
 
-export default App;
+// export default App;
+
+export default connect(
+    // mapStateToProps()
+    state => ({
+        authStore: state.authStore,
+        taskStore: state.taskStore,
+    }),
+
+    // mapDispatchToProps()
+    dispatch => ({
+        editAuth: (value) => {
+            dispatch({ type: "AUTH", value: value })
+        }
+    })
+)(App);
