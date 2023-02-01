@@ -22,28 +22,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        const login = "sf_student1";
-        const password = "Es#m*VvaA7";
-
-        const headers = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
-
-        const params = new URLSearchParams();
-        params.set('login', login);
-        params.set('password', password);
-
-        fetch('https://gateway.scan-interfax.ru/api/v1/account/login', {
-            method: 'POST',
-            header: headers,
-            body: params
-        }).then((response) => {
-            return response.json();
-        })
-            .then((data) => {
-                console.log(data);
-            });
+  
     }
 
     render() {
@@ -67,16 +46,10 @@ class App extends React.Component {
     }
 }
 
-// export default App;
-
 export default connect(
-    // mapStateToProps()
     state => ({
-        authStore: state.authStore,
-        taskStore: state.taskStore,
+        authStore: state.authStore
     }),
-
-    // mapDispatchToProps()
     dispatch => ({
         editAuth: (value) => {
             dispatch({ type: "AUTH", value: value })

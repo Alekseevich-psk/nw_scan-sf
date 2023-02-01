@@ -1,28 +1,59 @@
 import React from "react";
+import { connect } from "react-redux";
 
-
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            inputNameValue: 'sf_student1',
+            inputNamePass: 'Es#m*VvaA7',
+            inputValue: null
+        }
+
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+
+        const params = new URLSearchParams();
+        params.set('login', this.inputNameValue.value);
+        params.set('password', this.inputPassValue.value);
+
+        fetch('https://gateway.scan-interfax.ru/api/v1/account/login', {
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: params
+        }).then(res => res.ok ? res : Promise.reject(res))
+            .then(data => {
+                this.props.editAuth(true)
+            })
+            .catch(() => console.log('some error'));
     }
 
     render() {
         return (
-            <form className="form__auth">
+            <form className="form__auth active">
                 <div className="form__item">
-                    <label for="email" className="form__label label">Логин или номер телефона:</label>
-                    <input type="text" id="email" name="email" className="form__input input" />
+                    <label htmlFor="name" className="form__label label">Логин или номер телефона:</label>
+                    <input ref={(input) => this.inputNameValue = input} type="text" id="name" name="name" className="form__input input" defaultValue={this.state.inputNameValue} />
                     <div className="form__error">Введите корректные данные</div>
                 </div>
                 <div className="form__item">
-                    <label for="password" className="form__label label">Пароль:</label>
-                    <input type="password" id="password" name="password" className="form__input input" />
+                    <label htmlFor="password_auth" className="form__label label">Пароль:</label>
+                    <input ref={(input) => this.inputPassValue = input} type="password" id="password_auth" name="password" className="form__input input" defaultValue={this.state.inputNamePass} />
                     <div className="form__error">Введите корректные данные</div>
                 </div>
                 <div className="form__align">
-                    <input type="submit" className="form__btn btn disabled" disabled value="Войти" />
-                    <a href="/" className="form__rem-pass">Восстановить пароль</a>
+                    <input
+                        onClick={this.handleClick.bind(this)}
+                        type="submit"
+                        className="form__btn btn"
+                        value="Войти" />
                 </div>
                 <div className="form__enter">
                     <div className="form__enter-title">Войти через:</div>
@@ -34,3 +65,14 @@ export default class LoginForm extends React.Component {
         );
     }
 }
+
+export default connect(
+    state => ({
+        authStore: state.authStore
+    }),
+    dispatch => ({
+        editAuth: (value) => {
+            dispatch({ type: "AUTH", value: value })
+        }
+    })
+)(LoginForm);
