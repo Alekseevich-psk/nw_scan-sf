@@ -53,6 +53,7 @@ class LoginForm extends React.Component {
                         type="submit"
                         className="form__btn btn"
                         value="Войти" />
+                    <div className="form__error active">Введите корректные данные</div>
                 </div>
                 <div className="form__enter">
                     <div className="form__enter-title">Войти через:</div>

@@ -31,8 +31,8 @@ const config = {
         filename: "js/bundle.js",
         publicPath: "/",
     },
-    devtool: "source-map",
-    mode: "production",
+    // devtool: "source-map",
+    mode: "development",
     devServer: {
         historyApiFallback: true,
     },
@@ -49,9 +49,9 @@ const config = {
                     ],
                 },
             }),
-            new TerserPlugin({
-                extractComments: true,
-            }),
+            // new TerserPlugin({
+            //     extractComments: true,
+            // }),
         ],
     },
     module: {
@@ -90,7 +90,7 @@ const config = {
                         loader: "sass-loader",
                         options: {
                             implementation: require("sass"),
-                            sourceMap: true,
+                            // sourceMap: true,
                         },
                     },
                 ],
