@@ -31,8 +31,8 @@ const config = {
         filename: "js/bundle.js",
         publicPath: "/",
     },
-    // devtool: "source-map",
-    mode: "development",
+    devtool: "source-map",
+    mode: "production",
     devServer: {
         historyApiFallback: true,
     },
@@ -44,7 +44,7 @@ const config = {
                     preset: [
                         "default",
                         {
-                            discardComments: { removeAll: true },
+                            // discardComments: { removeAll: true },
                         },
                     ],
                 },
