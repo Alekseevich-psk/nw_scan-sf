@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 import Header from "./elements/Header.jsx";
 import Footer from "./elements/Footer.jsx";
+import Preloader from "./elements/Preloader.jsx";
 
 import Index from "./pages/Index.jsx";
 import Auth from "./pages/Auth.jsx";
@@ -19,10 +20,20 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            preloader: false,
+        }
+
+    }
+
+    showPreloader($value) {
+        this.setState({
+            preloader: $value
+        })
     }
 
     componentDidMount() {
-  
+
     }
 
     render() {
@@ -30,11 +41,12 @@ class App extends React.Component {
             <div>
 
                 <BrowserRouter>
+                    <Preloader preloader={this.state.preloader}/>
                     <Header />
                     <Routes>
                         <Route path="/" element={<Index />} />
                         <Route path="/search" element={<Search />} />
-                        <Route path="/auth" element={<Auth />} />
+                        <Route path="/auth" element={<Auth preloader={this.showPreloader.bind(this)} />} />
                         <Route path="/res" element={<Res />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>

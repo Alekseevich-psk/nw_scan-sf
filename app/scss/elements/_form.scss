@@ -8,10 +8,14 @@
     margin-left: auto;
 
     &__auth, &__reg {
-        display: none;
+        &.error {
+            .input {
+                border: 1px solid red;
+            }
 
-        &.active {
-            display: block;
+            .form__align .form__error{
+                display: block;
+            }
         }
     }
 

@@ -8,13 +8,16 @@ class LoginForm extends React.Component {
 
         this.state = {
             inputNameValue: 'sf_student1',
-            inputNamePass: 'Es#m*VvaA7'
+            inputNamePass: 'Es#m*VvaA7',
+            errorForm: false,
         }
 
     }
 
     handleClick(e) {
         e.preventDefault();
+
+        this.props.preloader(true);
 
         const params = new URLSearchParams();
         params.set('login', this.inputNameValue.value);
@@ -29,14 +32,26 @@ class LoginForm extends React.Component {
             body: params
         }).then(res => res.ok ? res : Promise.reject(res))
             .then(data => {
-                this.props.editAuth(true)
+                this.props.editAuth(true);
+                this.setState({
+                    errorForm: false
+                })
+                this.props.preloader(false);
             })
-            .catch(() => console.log('some error'));
+            .catch(() => {
+                console.log('some error');
+
+                this.setState({
+                    errorForm: true
+                })
+
+                this.props.preloader(false);
+            });
     }
 
     render() {
         return (
-            <form className="form__auth active">
+            <form className={"form__auth " + (this.state.errorForm ? "error" : "")}>
                 <div className="form__item">
                     <label htmlFor="name" className="form__label label">Логин или номер телефона:</label>
                     <input ref={(input) => this.inputNameValue = input} type="text" id="name" name="name" className="form__input input" defaultValue={this.state.inputNameValue} />
@@ -53,7 +68,7 @@ class LoginForm extends React.Component {
                         type="submit"
                         className="form__btn btn"
                         value="Войти" />
-                    <div className="form__error active">Введите корректные данные</div>
+                    <div className="form__error">Проверьте данные</div>
                 </div>
                 <div className="form__enter">
                     <div className="form__enter-title">Войти через:</div>

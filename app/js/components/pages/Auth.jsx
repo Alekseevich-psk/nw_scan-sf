@@ -33,7 +33,7 @@ export default class Auth extends React.Component {
                                     <button className={"form__select-form form__select-form--enter " + (this.state.selectFormLogin ? 'active' : '')} onClick={this.selectWrapForm.bind(this)}>Войти</button>
                                     <button className={"form__select-form form__select-form--reg " + (this.state.selectFormLogin ? '' : 'active')} onClick={this.selectWrapForm.bind(this)}>Зарегистрироваться</button>
                                 </div>
-                                {this.state.selectFormLogin ? <LoginForm /> : <RegForm />}
+                                {this.state.selectFormLogin ? <LoginForm preloader={this.props.preloader} /> : <RegForm />}
                             </div>
                             <div className="auth__bg auth__bg--mobile"></div>
                         </div>
