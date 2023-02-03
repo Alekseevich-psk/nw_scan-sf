@@ -72,6 +72,17 @@ export default function WhyMe() {
                             </div>
                         </SwiperSlide>
 
+                        <SwiperSlide className="why-me__slide">
+                            <div className="why-me__slide-body">
+                                <div className="why-me__ico">
+                                    <img src="./images/svg/ico-why-me-3.svg" alt="" />
+                                </div>
+                                <div className="why-me__desc">
+                                    Тестовый слайд 
+                                </div>
+                            </div>
+                        </SwiperSlide>
+
                     </Swiper>
                 </div>
                 <div className="why-me__bg"></div>
