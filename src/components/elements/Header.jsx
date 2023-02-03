@@ -23,9 +23,7 @@ class Header extends React.Component {
     componentDidMount() {
  
         if (this.props.authStore.auth) {
-
             const token = localStorage.getItem('accessToken');
-
             fetch('https://gateway.scan-interfax.ru/api/v1/account/info', {
                 method: 'GET',
                 headers: {
@@ -37,8 +35,6 @@ class Header extends React.Component {
                     return data.json();
                 })
                 .then((data) => {
-                    console.log(data.eventFiltersInfo.usedCompanyCount);
-
                     this.setState({
                         limitCompany: data.eventFiltersInfo.companyLimit,
                         usedCompany: data.eventFiltersInfo.usedCompanyCount,

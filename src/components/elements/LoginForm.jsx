@@ -15,9 +15,6 @@ class LoginForm extends React.Component {
 
     }
 
-    
-    
-
     handleClick(e) {
         e.preventDefault();
 
@@ -54,12 +51,6 @@ class LoginForm extends React.Component {
                 })
                 this.props.preloader(false);
             });
-    }
-
-    componentDidMount() {
-        if(localStorage.getItem('accessToken') !== null) {
-              this.props.editAuth(true);
-        }
     }
 
     render() {

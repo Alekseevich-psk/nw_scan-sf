@@ -33,7 +33,9 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-
+        if(localStorage.getItem('accessToken') !== null) {
+              this.props.editAuth(true);
+        }
     }
 
     render() {

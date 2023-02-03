@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from "react-redux";
 
-export default function Tariff() {
+function Tariff($props) {
+    // console.log($props);
     return (
         <section className="tariff" id="tariff">
             <div className="container">
@@ -16,7 +18,7 @@ export default function Tariff() {
                             </div>
                         </div>
                         <div className="card__body">
-                            <div className="card__info">Текущий тариф</div>
+                            <div className={"card__info " + ($props.authStore.auth ? "show" : 'hide')}>Текущий тариф</div>
                             <div className="card__wrap-price">
                                 <div className="card__price card__price-now">799 <span>&#8381;</span></div>
                                 <div className="card__price card__price--old">1 200 <span>&#8381;</span></div>
@@ -102,3 +104,9 @@ export default function Tariff() {
         </section>
     );
 }
+
+export default connect(
+    state => ({
+        authStore: state.authStore
+    })
+)(Tariff);
