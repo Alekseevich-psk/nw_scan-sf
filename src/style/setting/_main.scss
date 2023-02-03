@@ -1,5 +1,6 @@
-html, body {
-    font-family: 'Inter', arial, sans-serif;
+html,
+body {
+    font-family: "Inter", arial, sans-serif;
     font-size: 16px;
     line-height: 1.4;
     padding: 0;
@@ -32,4 +33,12 @@ html, body {
     @media (max-width: 768px) {
         width: 100%;
     }
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }

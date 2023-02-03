@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 class LoginForm extends React.Component {
 
@@ -9,10 +10,12 @@ class LoginForm extends React.Component {
         this.state = {
             inputNameValue: 'sf_student1',
             inputNamePass: 'Es#m*VvaA7',
-            errorForm: false,
+            errorForm: false
         }
 
     }
+
+    
     
 
     handleClick(e) {
@@ -44,8 +47,8 @@ class LoginForm extends React.Component {
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('expire', data.expire);
             })
-            .catch(() => {
-                console.log('some error');
+            .catch((data) => {
+                console.log(data);
                 this.setState({
                     errorForm: true
                 })
