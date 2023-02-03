@@ -32,9 +32,12 @@ const config = {
         publicPath: "/",
     },
     devtool: "source-map",
-    mode: "production",
+    // mode: "production",
     devServer: {
         historyApiFallback: true,
+        static: {
+            directory: path.join(__dirname, "dist"),
+        },
     },
     optimization: {
         minimize: true,

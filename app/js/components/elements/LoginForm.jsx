@@ -13,6 +13,7 @@ class LoginForm extends React.Component {
         }
 
     }
+    
 
     handleClick(e) {
         e.preventDefault();
@@ -32,19 +33,25 @@ class LoginForm extends React.Component {
             body: params
         }).then(res => res.ok ? res : Promise.reject(res))
             .then(data => {
+                this.props.preloader(false);
+                return data.json();
+            })
+            .then((data) => {
                 this.props.editAuth(true);
                 this.setState({
                     errorForm: false
-                })
-                this.props.preloader(false);
+                });
+
+                console.log(data);
+
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('expire', data.expire);
             })
             .catch(() => {
                 console.log('some error');
-
                 this.setState({
                     errorForm: true
                 })
-
                 this.props.preloader(false);
             });
     }

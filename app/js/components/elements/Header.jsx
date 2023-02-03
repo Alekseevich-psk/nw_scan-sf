@@ -44,7 +44,7 @@ class Header extends React.Component {
                             <div className={"header__user header__user--auth " + (this.props.authStore.auth ? 'show' : 'hide')}>
                                 <div className="header__user-text">
                                     <div className="header__name">Алексей А.</div>
-                                    <a href="/" className="header__btn-out">Выйти</a>
+                                    <Link to="/" className="header__btn-out">Выйти</Link>
                                 </div>
                                 <div className="header__avatar">
                                     <img src="./images/preview-user.png" alt="" />
