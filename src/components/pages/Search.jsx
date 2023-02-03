@@ -6,6 +6,23 @@ class Search extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            inputsValue: null,
+            checkBoxValues: null
+        }
+    }
+
+    getInputValue(obj) {
+        this.setState({
+            inputsValue: obj
+        })
+    }
+
+    getCheckBoxValue(obj) {
+        this.setState({
+            checkBoxValues: obj
+        })
     }
 
     render() {
@@ -25,7 +42,7 @@ class Search extends React.Component {
                         <form className="search__form">
                             <div className="search__form-wrapper">
 
-                                <InputFieldsForm />
+                                <InputFieldsForm getInputValue={this.getInputValue} />
                                 <CheckBoxFieldsForm />
 
                             </div>
