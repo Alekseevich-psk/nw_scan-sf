@@ -1,16 +1,58 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import MiniPreloader from "./MiniPreloader";
 
 class Header extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            limitCompany: null,
+            usedCompany: null,
+            showPreloader: true
+        }
     }
 
     handleClick() {
         localStorage.clear();
         this.props.editAuth(false);
+    }
+
+    componentDidMount() {
+ 
+        if (this.props.authStore.auth) {
+
+            const token = localStorage.getItem('accessToken');
+
+            fetch('https://gateway.scan-interfax.ru/api/v1/account/info', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
+            }).then(res => res.ok ? res : Promise.reject(res))
+                .then(data => {
+                    return data.json();
+                })
+                .then((data) => {
+                    console.log(data.eventFiltersInfo.usedCompanyCount);
+
+                    this.setState({
+                        limitCompany: data.eventFiltersInfo.companyLimit,
+                        usedCompany: data.eventFiltersInfo.usedCompanyCount,
+                        showPreloader: false
+                    })
+                })
+                .catch((data) => {
+                    console.log(data);
+                });
+        }
+    }
+
+    showPreloader() {
+        if(this.state.showPreloader) return <MiniPreloader/>;
     }
 
     render() {
@@ -38,17 +80,17 @@ class Header extends React.Component {
                         <div className={"header__inner header__inner--info " + (this.props.authStore.auth ? 'show' : 'hide')}>
                             <div className="header__info">
                                 <div className="header__info-item">
-                                    Использовано компаний <span>34</span>
+                                    Использовано компаний: {this.showPreloader()}<span>{this.state.usedCompany}</span>
                                 </div>
                                 <div className="header__info-item">
-                                    Лимит по компаниям <span>100</span>
+                                    Лимит по компаниям: {this.showPreloader()}<span>{this.state.limitCompany}</span>
                                 </div>
                             </div>
                         </div>
                         <div className="header__inner header__inner--user">
                             <div className={"header__user header__user--auth " + (this.props.authStore.auth ? 'show' : 'hide')}>
                                 <div className="header__user-text">
-                                    <div className="header__name">Алексей А.</div>
+                                    <div className="header__name">Андрей И.</div>
                                     <Link
                                         to="/"
                                         onClick={this.handleClick.bind(this)}
