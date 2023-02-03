@@ -131,6 +131,10 @@
         color: #999999;
         font-size: 14px;
         padding: 0;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     &__link {

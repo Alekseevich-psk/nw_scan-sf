@@ -8,6 +8,11 @@ class Header extends React.Component {
         super(props);
     }
 
+    handleClick() {
+        localStorage.clear();
+        this.props.editAuth(false);
+    }
+
     render() {
         return (
             <header className="header">
@@ -30,7 +35,7 @@ class Header extends React.Component {
                                 </ul>
                             </div>
                         </div>
-                        <div className="header__inner header__inner--info">
+                        <div className={"header__inner header__inner--info " + (this.props.authStore.auth ? 'show' : 'hide')}>
                             <div className="header__info">
                                 <div className="header__info-item">
                                     Использовано компаний <span>34</span>
@@ -44,7 +49,10 @@ class Header extends React.Component {
                             <div className={"header__user header__user--auth " + (this.props.authStore.auth ? 'show' : 'hide')}>
                                 <div className="header__user-text">
                                     <div className="header__name">Алексей А.</div>
-                                    <Link to="/" className="header__btn-out">Выйти</Link>
+                                    <Link
+                                        to="/"
+                                        onClick={this.handleClick.bind(this)}
+                                        className="header__btn-out">Выйти</Link>
                                 </div>
                                 <div className="header__avatar">
                                     <img src="./images/preview-user.png" alt="" />
@@ -63,5 +71,12 @@ class Header extends React.Component {
 }
 
 export default connect(
-    state => ({ authStore: state.authStore })
+    state => ({
+        authStore: state.authStore
+    }),
+    dispatch => ({
+        editAuth: (value) => {
+            dispatch({ type: "AUTH", value: value })
+        }
+    })
 )(Header);

@@ -41,9 +41,6 @@ class LoginForm extends React.Component {
                 this.setState({
                     errorForm: false
                 });
-
-                console.log(data);
-
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('expire', data.expire);
             })
@@ -54,6 +51,12 @@ class LoginForm extends React.Component {
                 })
                 this.props.preloader(false);
             });
+    }
+
+    componentDidMount() {
+        if(localStorage.getItem('accessToken') !== null) {
+              this.props.editAuth(true);
+        }
     }
 
     render() {
