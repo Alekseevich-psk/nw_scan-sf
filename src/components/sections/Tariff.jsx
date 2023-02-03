@@ -2,14 +2,13 @@ import React from 'react';
 import { connect } from "react-redux";
 
 function Tariff($props) {
-    // console.log($props);
     return (
         <section className="tariff" id="tariff">
             <div className="container">
                 <h2 className="why-me__s-title s-title">Наши тарифы</h2>
                 <div className="tariff__wrapper">
 
-                    <div className="tariff__card card card--beginner">
+                    <div className={"tariff__card card card--beginner " + ($props.authStore.auth ? "active" : '')}>
                         <div className="card__header card__header">
                             <div className="card__title">Beginner</div>
                             <div className="card__desc">Для небольшого исследования</div>
@@ -18,7 +17,7 @@ function Tariff($props) {
                             </div>
                         </div>
                         <div className="card__body">
-                            <div className={"card__info " + ($props.authStore.auth ? "show" : 'hide')}>Текущий тариф</div>
+                            <div className="card__info">Текущий тариф</div>
                             <div className="card__wrap-price">
                                 <div className="card__price card__price-now">799 <span>&#8381;</span></div>
                                 <div className="card__price card__price--old">1 200 <span>&#8381;</span></div>
@@ -36,7 +35,9 @@ function Tariff($props) {
                             </ul>
                         </div>
                         <div className="card__footer">
-                            <button className="card__btn btn btn--link">Перейти в личный кабинет</button>
+                            <button 
+                            disabled={$props.authStore.auth}
+                            className="card__btn btn">Перейти в личный кабинет</button>
                         </div>
                     </div>
 
