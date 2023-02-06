@@ -1,6 +1,6 @@
 import React from "react";
-import InputFieldsForm from "../elements/InputFieldsForm";
-import CheckBoxFieldsForm from "../elements/CheckBoxFieldsForm";
+import InputFieldsForm from "./../components/elements/InputFieldsForm";
+import CheckBoxFieldsForm from "./../components/elements/CheckBoxFieldsForm";
 
 class Search extends React.Component {
 

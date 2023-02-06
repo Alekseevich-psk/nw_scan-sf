@@ -1,6 +1,6 @@
 import React from "react";
-import DocItem from "../elements/DocItem";
-import ResInfo from "../sections/ResInfo";
+import DocItem from "./../components/elements/DocItem";
+import ResInfo from "./../components/sections/ResInfo";
 
 export default function Res() {
     return (

@@ -9,11 +9,11 @@ import Header from "./components/elements/Header";
 import Footer from "./components/elements/Footer";
 import Preloader from "./components/elements/Preloader";
 
-import Index from "./components/pages/Index";
-import Auth from "./components/pages/Auth";
-import Res from "./components/pages/Res";
-import Search from "./components/pages/Search";
-import NotFoundPage from "./components/pages/NotFoundPage";
+import Index from "./pages/Index";
+import Auth from "./pages/Auth";
+import Res from "./pages/Res";
+import Search from "./pages/Search";
+import NotFoundPage from "./pages/NotFoundPage";
 
 class App extends React.Component {
 
