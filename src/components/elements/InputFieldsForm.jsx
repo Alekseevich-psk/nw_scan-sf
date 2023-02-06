@@ -46,29 +46,40 @@ class InputFieldsForm extends React.Component {
                 break;
 
             case cls.contains('input--date-end'):
+                console.log(elem.target.value);
                 this.setState({
                     inputDateEnd: elem.target.value
                 });
-    
-                if (this.state.inputDateEnd > this.state.inputDateStart) {
-                    this.setState({
-                        inputDateError: true
-                    })
-                } else {
-                    this.setState({
-                        inputDateError: false
-                    })
-                }
                 break;
         }
 
+        this.checkDateValue();
+        this.sendValue();
     }
 
-    componentDidUpdate() {
-        console.log(this.state.inputInn, this.state.inputCountRes);
-        if (this.state.inputInn !== null && this.state.inputCountRes !== null) {
-            this.props.getInputValue(this.state);
+    sendValue() {
+        this.props.getInputValue(this.state);
+    }
+
+    checkDateValue() {
+        if (this.state.inputDateStart === null
+            || this.state.inputDateEnd === null
+            && this.state.inputDateStart > this.state.inputDateEnd) {
+            this.setState({
+                inputDateError: true
+            })
+        } else {
+            this.setState({
+                inputDateError: false
+            })
         }
+    }
+
+    checkCountValue(elem) {
+        console.log(elem.target.value.length);
+        (elem.target.value.length < 10 || elem.target.value == '')
+            ? this.setState({ inputInn: null, inputInnError: true })
+            : this.setState({ inputInn: elem.target.value, inputInnError: false });
     }
 
     render() {
@@ -77,6 +88,7 @@ class InputFieldsForm extends React.Component {
                 <div className="search__item">
                     <label htmlFor="inn" className="search__label label">ИНН компании <sup>*</sup></label>
                     <input
+                        onBlur={this.checkCountValue.bind(this)}
                         onChange={this.changeInputValue.bind(this)}
                         type="number"
                         className={"search__input input input--inn " + (this.state.inputInnError ? 'input--error' : '')}
@@ -89,13 +101,9 @@ class InputFieldsForm extends React.Component {
                         className="search__options"
                         onChange={this.changeInputValue.bind(this)}
                         id="pet-select">
-                        <option value="">Любая</option>
-                        <option value="dog">Dog</option>
-                        <option value="cat">Cat</option>
-                        <option value="hamster">Hamster</option>
-                        <option value="parrot">Parrot</option>
-                        <option value="spider">Spider</option>
-                        <option value="goldfish">Goldfish</option>
+                        <option value="positive">Позитивная</option>
+                        <option value="negative">Негативная</option>
+                        <option value="any">Любая</option>
                     </select>
                 </div>
                 <div className="search__item">
@@ -109,20 +117,18 @@ class InputFieldsForm extends React.Component {
                     <p className={"search__error error " + (this.state.inputCountResError ? '' : 'hide')}>Некорректный ввод данных</p>
                 </div>
                 <div className="search__wrap-item">
-                    <label htmlFor="" className="search__label label">Диапазон поиска <sup>*</sup></label>
+                    <label className="search__label label">Диапазон поиска <sup>*</sup></label>
                     <div className="search__wrap-input">
                         <input
                             onChange={this.changeInputValue.bind(this)}
                             type="date"
                             className="search__input input input--date-start"
-                            id="date"
                             name="date" />
                         <input
                             onChange={this.changeInputValue.bind(this)}
                             type="date"
                             className="search__input input input--date-end"
-                            id="date"
-                            name="date" />
+                            name="date2" />
                         <p className={"search__error error " + (this.state.inputDateError ? '' : 'hide')}>Некорректный ввод данных</p>
                     </div>
                 </div>

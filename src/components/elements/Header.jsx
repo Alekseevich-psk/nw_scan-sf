@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import profileInfo from "../../api/profileInfo";
 import MiniPreloader from "./MiniPreloader";
 
 class Header extends React.Component {
@@ -21,34 +22,30 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
- 
+
         if (this.props.authStore.auth) {
-            const token = localStorage.getItem('accessToken');
-            fetch('https://gateway.scan-interfax.ru/api/v1/account/info', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                }
-            }).then(res => res.ok ? res : Promise.reject(res))
-                .then(data => {
-                    return data.json();
-                })
-                .then((data) => {
-                    this.setState({
-                        limitCompany: data.eventFiltersInfo.companyLimit,
-                        usedCompany: data.eventFiltersInfo.usedCompanyCount,
-                        showPreloader: false
-                    })
-                })
-                .catch((data) => {
-                    console.log(data);
-                });
+            const profileInfoStatus = new Promise((resolve, reject) => {
+                profileInfo(resolve, reject);
+            });
+
+            profileInfoStatus
+                .then(
+                    result => {
+                        this.setState({
+                            limitCompany: result.eventFiltersInfo.companyLimit,
+                            usedCompany: result.eventFiltersInfo.usedCompanyCount,
+                            showPreloader: false,
+                        });
+                    },
+                    error => {
+                        console.log(error);
+                    }
+                );
         }
     }
 
     showPreloader() {
-        if(this.state.showPreloader) return <MiniPreloader/>;
+        if (this.state.showPreloader) return <MiniPreloader />;
     }
 
     render() {

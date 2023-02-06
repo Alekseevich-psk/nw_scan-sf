@@ -8,21 +8,33 @@ class Search extends React.Component {
         super(props);
 
         this.state = {
-            inputsValue: null,
-            checkBoxValues: null
+            inputsValue: {},
+            checkBoxValues: null,
+            requiredData: false
         }
     }
 
     getInputValue(obj) {
-        this.setState({
-            inputsValue: obj
-        })
+        if (obj.inputInnError
+            || obj.inputCountResError
+            || obj.inputDateError) {
+            this.setState({
+                requiredData: true,
+                inputsValue: obj
+            })
+        } else {
+            console.log('test-2');
+            this.setState({
+                requiredData: false,
+            })
+        }
+
     }
 
     getCheckBoxValue(obj) {
-        this.setState({
-            checkBoxValues: obj
-        })
+        // this.setState({
+        //     checkBoxValues: obj
+        // })
     }
 
     render() {
@@ -42,8 +54,8 @@ class Search extends React.Component {
                         <form className="search__form">
                             <div className="search__form-wrapper">
 
-                                <InputFieldsForm getInputValue={this.getInputValue} />
-                                <CheckBoxFieldsForm />
+                                <InputFieldsForm getInputValue={this.getInputValue.bind(this)} />
+                                <CheckBoxFieldsForm requiredData={this.state.requiredData} />
 
                             </div>
                         </form>

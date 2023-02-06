@@ -13,7 +13,6 @@ export default function login(login, password, resolve, reject) {
         },
         body: params,
     })
-        .then((res) => (res.ok ? res : Promise.reject(res)))
         .then((data) => {
             return data.json();
         })
