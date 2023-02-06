@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import login from "../../API/login.js";
+import login from "../../api/login.js";
 
 class LoginForm extends React.Component {
 

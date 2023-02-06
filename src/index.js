@@ -4,10 +4,10 @@ import "./index.scss";
 
 // Redux
 import { Provider } from "react-redux";
-import combineReducers from "./reducers/index";
+import combineReducers from "./store/index";
 import { createStore } from "redux";
 
-import App from "./components/App";
+import App from "./App";
 
 const store = createStore(combineReducers);
 const root = ReactDOM.createRoot(document.getElementById("root"));
