@@ -33,8 +33,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        if(localStorage.getItem('accessToken') !== null) {
-              this.props.editAuth(true);
+        if (localStorage.getItem('accessToken') !== null) {
+            this.props.editAuth(true);
         }
     }
 
@@ -43,7 +43,7 @@ class App extends React.Component {
             <div>
 
                 <BrowserRouter>
-                    <Preloader preloader={this.state.preloader}/>
+                    <Preloader preloader={this.state.preloader} />
                     <Header />
                     <Routes>
                         <Route path="/" element={<Index />} />

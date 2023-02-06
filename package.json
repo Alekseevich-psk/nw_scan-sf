@@ -46,7 +46,14 @@
         ]
     },
     "devDependencies": {
-        "react-app-rewired": "^2.2.1",
-        "node-sass": "^8.0.0"
-    }
+        "babel-plugin-root-import": "^6.6.0",
+        "node-sass": "^8.0.0",
+        "react-app-rewired": "^2.2.1"
+    },
+    "compilerOptions": {
+        "baseUrl": "src"
+    },
+    "include": [
+        "src"
+    ]
 }

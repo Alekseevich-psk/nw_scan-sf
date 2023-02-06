@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import login from "../../API/login.js";
 
 class LoginForm extends React.Component {
 
@@ -8,8 +9,8 @@ class LoginForm extends React.Component {
         super(props);
 
         this.state = {
-            inputNameValue: 'sf_student1',
-            inputNamePass: 'Es#m*VvaA7',
+            inputNameValueDef: 'sf_student1',
+            inputNamePassDef: 'Es#m*VvaA7',
             errorForm: false
         }
 
@@ -20,50 +21,41 @@ class LoginForm extends React.Component {
 
         this.props.preloader(true);
 
-        const params = new URLSearchParams();
-        params.set('login', this.inputNameValue.value);
-        params.set('password', this.inputPassValue.value);
+        const loginStatus = new Promise((resolve, reject) => {
+            login(this.inputNameValueDef.value, this.inputPassValue.value, resolve, reject);
+        });
 
-        fetch('https://gateway.scan-interfax.ru/api/v1/account/login', {
-            method: 'POST',
-            header: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: params
-        }).then(res => res.ok ? res : Promise.reject(res))
-            .then(data => {
-                this.props.preloader(false);
-                return data.json();
-            })
-            .then((data) => {
-                this.props.editAuth(true);
-                this.setState({
-                    errorForm: false
-                });
-                localStorage.setItem('accessToken', data.accessToken);
-                localStorage.setItem('expire', data.expire);
-            })
-            .catch((data) => {
-                console.log(data);
-                this.setState({
-                    errorForm: true
-                })
-                this.props.preloader(false);
-            });
+        loginStatus
+            .then(
+                result => {
+                    this.props.preloader(false);
+                    this.props.editAuth(true);
+                    this.setState({
+                        errorForm: false,
+                    });
+                },
+                error => {
+                    this.props.preloader(false);
+                    console.log(error);
+                    this.setState({
+                        errorForm: true,
+                    });
+                }
+            );
+
     }
 
     render() {
         return (
-            <form className={"form__auth " + (this.state.errorForm ? "error" : "")}>
+            <form className={"form__auth " + (this.state.errorForm ? "error-form" : "")}>
                 <div className="form__item">
                     <label htmlFor="name" className="form__label label">Логин или номер телефона:</label>
-                    <input ref={(input) => this.inputNameValue = input} type="text" id="name" name="name" className="form__input input" defaultValue={this.state.inputNameValue} />
+                    <input ref={(input) => this.inputNameValueDef = input} type="text" id="name" name="name" className="form__input input" defaultValue={this.state.inputNameValueDef} />
                     <div className="form__error">Введите корректные данные</div>
                 </div>
                 <div className="form__item">
                     <label htmlFor="password_auth" className="form__label label">Пароль:</label>
-                    <input ref={(input) => this.inputPassValue = input} type="password" id="password_auth" name="password" className="form__input input" defaultValue={this.state.inputNamePass} />
+                    <input ref={(input) => this.inputPassValue = input} type="password" id="password_auth" name="password" className="form__input input" defaultValue={this.state.inputNamePassDef} />
                     <div className="form__error">Введите корректные данные</div>
                 </div>
                 <div className="form__align">

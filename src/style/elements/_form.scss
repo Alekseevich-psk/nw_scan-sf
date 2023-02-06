@@ -8,7 +8,7 @@
     margin-left: auto;
 
     &__auth, &__reg {
-        &.error {
+        &.error-form {
             .input {
                 border: 1px solid red;
             }
