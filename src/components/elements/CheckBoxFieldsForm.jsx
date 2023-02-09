@@ -1,4 +1,5 @@
 import React from "react";
+import BtnSendForm from "./BtnSendForm";
 
 class CheckBoxFieldsForm extends React.Component {
 
@@ -19,7 +20,6 @@ class CheckBoxFieldsForm extends React.Component {
 
 
     render() {
-        // console.log(this.props.requiredData);
         return (
             <div className="search__form-inner">
                 <div className="search__item">
@@ -53,13 +53,7 @@ class CheckBoxFieldsForm extends React.Component {
                     <label htmlFor="new-news" className="search__ch-label ch-label">Включать сводки новостей</label>
                 </div>
 
-                <div className="search__align">
-                    <input 
-                    type="submit" 
-                    disabled = {(this.props.requiredData) ? "" : "disabled"}
-                    className={"search__btn btn " + (this.props.requiredData ? "" : "disabled")} value="Поиск" />
-                    <span>* Обязательные к заполнению поля</span>
-                </div>
+                <BtnSendForm requiredData={this.props.requiredData} />
             </div>
         )
     }
