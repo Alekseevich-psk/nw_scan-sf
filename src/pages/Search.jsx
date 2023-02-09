@@ -1,6 +1,8 @@
 import React from "react";
 import InputFieldsForm from "./../components/elements/InputFieldsForm";
 import CheckBoxFieldsForm from "./../components/elements/CheckBoxFieldsForm";
+// import objectSearch from "./../api/objectSearch";
+import histograms from "./../api/histograms";
 
 class Search extends React.Component {
 
@@ -14,10 +16,18 @@ class Search extends React.Component {
         }
     }
 
-    inputValue(value) {
+    inputValue(status, obj) {
         this.setState({
-            requiredData: value
+            requiredData: status
         })
+
+        if (!status) return;
+
+        this.setState({
+            inputsValue: obj
+        })
+        
+        histograms(obj);
     }
 
     getCheckBoxValue(obj) {

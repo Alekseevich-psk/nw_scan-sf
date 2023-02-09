@@ -61,7 +61,7 @@ class InputFieldsForm extends React.Component {
                 if (obj.dateStart > obj.dateEnd) return;
             }
 
-            this.props.inputValue(true);
+            this.props.inputValue(true, this.state.inputValues);
         }, 1000);
 
     }
