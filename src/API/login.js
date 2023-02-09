@@ -13,15 +13,35 @@ export default function login(login, password, resolve, reject) {
         },
         body: params,
     })
-        .then((data) => {
-            return data.json();
+        .then((res) => {
+            if (res.status >= 200 && res.status < 300) {
+                return res;
+            } else {
+                let error = new Error(res.statusText);
+                error.response = res;
+                throw error;
+            }
         })
-        .then((data) => {
-            localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("expire", data.expire);
-            resolve(true);
+        // .then((res) => {
+        //     if (res.headers["content-type"] !== "application/json") {
+        //         let error = new Error("Некорректный ответ от сервера");
+        //         error.response = res;
+        //         throw error;
+        //     }
+        //     return res;
+        // })
+        .then((res) => {
+            return res.json();
         })
-        .catch((data) => {
-            reject(data);
+        .then((res) => {
+            console.log(res);
+            localStorage.setItem("accessToken", res.accessToken);
+            localStorage.setItem("expire", res.expire);
+            resolve(res);
+        })
+        .catch((e) => {
+            // console.log("Error: " + e.message);
+            // console.log(e.response);
+            reject("Error: " + e.message);
         });
 }
