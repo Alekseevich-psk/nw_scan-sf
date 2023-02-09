@@ -1,8 +1,8 @@
-import { getElementError } from "@testing-library/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function InputDate(props) {
     const [error, setError] = useState(false);
+    const [textError, setTextError] = useState('Введите корректные данные');
     const [date, setDate] = useState({ start: null, end: null });
 
     function onChangeValue(e) {
@@ -35,7 +35,41 @@ export default function InputDate(props) {
     }
 
     function validate(valueStart, valueEnd) {
-        (valueStart > valueEnd) ? setError(true) : setError(false);
+        const res = [valueStart, valueEnd];
+        const today = formatDate(new Date());
+
+        for (let i = 0; i < res.length; i++) {
+            if (res[i]  > today) {
+                setError(true);
+                setTextError('даты не должны быть в будущем времени');
+                return;
+            } else {
+                setError(false);
+            }
+
+        }
+
+
+        if (valueStart > valueEnd) {
+            setError(true);
+            setTextError('дата начала не может быть позже даты конца');
+        } else {
+            setError(false);
+        }
+    }
+
+    function formatDate(date) {
+
+        let dd = date.getDate();
+        if (dd < 10) dd = '0' + dd;
+
+        let mm = date.getMonth() + 1;
+        if (mm < 10) mm = '0' + mm;
+
+        let yy = date.getFullYear();
+        if (yy < 10) yy = '0' + yy;
+
+        return yy + '-' + mm + '-' + dd;
     }
 
     return (
@@ -52,7 +86,7 @@ export default function InputDate(props) {
                     type="date"
                     className="search__input input input--date-end"
                     name="date2" />
-                <p className={"search__error error " + (error ? '' : 'hide')}>Некорректный ввод данных</p>
+                <p className={"search__error error " + (error ? '' : 'hide')}>{textError}</p>
             </div>
         </div>
     )
