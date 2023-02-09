@@ -2,6 +2,11 @@
     user-select: none;
     display: none;
 
+    &:disabled ~ .ch-label {
+        opacity: 0.3;
+        cursor: auto;
+    }
+
     & ~ .ch-label {
         cursor: pointer;
         user-select: none;
@@ -21,11 +26,9 @@
     }
 
     &:checked ~ .ch-label {
-
         &:before {
             background-size: 100% 100%;
             background-image: url("./../../../public/images/svg/ico-ok-item.svg");
         }
     }
-    
 }

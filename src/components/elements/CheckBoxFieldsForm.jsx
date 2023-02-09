@@ -7,15 +7,25 @@ class CheckBoxFieldsForm extends React.Component {
         super(props);
 
         this.state = {
-            searchCheckbox: false,
-            businessContext: false,
-            mainRole: false,
-            riskFactors: false,
-            technicalNews: false,
-            advertisement: false,
-            newNews: false,
+            maxFullness: null,
+            inBusinessNews: null,
+            onlyMainRole: null,
+            advertisement: null,
+            isDigest: null,
         }
 
+    }
+
+    onChange(e) {
+        const state = this.state;
+        for (const key in state) {
+            if (e.target.name === key) {
+                state[key] = e.target.checked;
+                this.setState(state);
+            }
+        }
+
+        this.props.getCheckBoxValue(state);
     }
 
 
@@ -23,37 +33,53 @@ class CheckBoxFieldsForm extends React.Component {
         return (
             <div className="search__form-inner">
                 <div className="search__item">
-                    <input type="checkbox" className="search__checkbox checkbox" name="maximum-full" id="maximum-full" />
-                    <label htmlFor="maximum-full" className="search__ch-label ch-label">Признак максимальной полноты</label>
+                    <input
+                        onChange={this.onChange.bind(this)}
+                        type="checkbox" className="search__checkbox checkbox" name="maxFullness" id="maxFullness" />
+                    <label htmlFor="maxFullness" className="search__ch-label ch-label">Признак максимальной полноты</label>
                 </div>
                 <div className="search__item">
-                    <input type="checkbox" name="business-context" id="business-context" className="search__checkbox checkbox" />
-                    <label htmlFor="business-context" className="search__ch-label ch-label">Упоминания в бизнес-контексте</label>
+                    <input
+                        onChange={this.onChange.bind(this)}
+                        type="checkbox" name="inBusinessNews" id="inBusinessNews" className="search__checkbox checkbox" />
+                    <label htmlFor="inBusinessNews" className="search__ch-label ch-label">Упоминания в бизнес-контексте</label>
                 </div>
                 <div className="search__item">
-                    <input type="checkbox" name="main-role" id="main-role" className="search__checkbox checkbox" />
-                    <label htmlFor="main-role" className="search__ch-label ch-label">Главная роль в публикации</label>
+                    <input
+                        onChange={this.onChange.bind(this)}
+                        type="checkbox" name="onlyMainRole" id="onlyMainRole" className="search__checkbox checkbox" />
+                    <label htmlFor="onlyMainRole" className="search__ch-label ch-label">Главная роль в публикации</label>
                 </div>
                 <div className="search__item">
-                    <input type="checkbox" name="risk-factors" id="risk-factors" className="search__checkbox checkbox" />
+                    <input
+                        onChange={this.onChange.bind(this)}
+                        type="checkbox" name="risk-factors" disabled id="risk-factors" className="search__checkbox checkbox" />
                     <label htmlFor="risk-factors" className="search__ch-label ch-label ch-label--disabled">Публикации только с
                         риск-факторами</label>
                 </div>
                 <div className="search__item">
-                    <input type="checkbox" name="technical-news" id="technical-news" className="search__checkbox checkbox" />
+                    <input
+                        onChange={this.onChange.bind(this)}
+                        type="checkbox" name="technical-news" disabled id="technical-news" className="search__checkbox checkbox" />
                     <label htmlFor="technical-news" className="search__ch-label ch-label ch-label--disabled">Включать технические
                         новости рынков</label>
                 </div>
                 <div className="search__item">
-                    <input type="checkbox" name="advertisement" id="advertisement" className="search__checkbox checkbox" />
+                    <input
+                        onChange={this.onChange.bind(this)}
+                        type="checkbox" name="advertisement" id="advertisement" className="search__checkbox checkbox" />
                     <label htmlFor="advertisement" className="search__ch-label ch-label">Включать анонсы и календари</label>
                 </div>
                 <div className="search__item">
-                    <input type="checkbox" name="new-news" id="new-news" className="search__checkbox checkbox" />
-                    <label htmlFor="new-news" className="search__ch-label ch-label">Включать сводки новостей</label>
+                    <input
+                        onChange={this.onChange.bind(this)}
+                        type="checkbox" name="isDigest" id="isDigest" disabled className="search__checkbox checkbox" />
+                    <label htmlFor="isDigest" className="search__ch-label ch-label">Включать сводки новостей</label>
                 </div>
 
-                <BtnSendForm requiredData={this.props.requiredData} />
+                <BtnSendForm
+                    startSearch={this.props.startSearch}
+                    requiredData={this.props.requiredData} />
             </div>
         )
     }

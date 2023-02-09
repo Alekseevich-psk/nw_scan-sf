@@ -1,5 +1,5 @@
-export default function histograms(obj) {
-    console.log(obj);
+export default function histograms(objInputValues, objCheckBoxValues) {
+    console.log(objInputValues, objCheckBoxValues);
 
     const token = localStorage.getItem("accessToken");
     if (!token) return;
@@ -16,12 +16,12 @@ export default function histograms(obj) {
             "intervalType": "month",
             "histogramTypes": ["totalDocuments", "riskFactors"],
             "sortType": "issueDate",
-            "limit": obj.count,
+            "limit": objInputValues.count,
             "sortDirectionType": "asc",
             "similarMode": "none",
             "issueDateInterval": {
-                "startDate": obj.dateStart,
-                "endDate": obj.dateEnd
+                "startDate": objInputValues.dateStart,
+                "endDate": objInputValues.dateEnd
             },
             "attributeFilters": {
                 "excludeTechNews": true,
@@ -35,13 +35,13 @@ export default function histograms(obj) {
                             "type": "company",
                             "sparkId": null,
                             "entityId": null,
-                            "inn": obj.inn,
-                            "maxFullness": true,
-                            "inBusinessNews": null
+                            "inn": objInputValues.inn,
+                            "maxFullness": objCheckBoxValues.maxFullness,
+                            "inBusinessNews": objCheckBoxValues.inBusinessNews
                         }
                     ],
-                    "onlyMainRole": true,
-                    "tonality": obj.ton,
+                    "onlyMainRole": objCheckBoxValues.onlyMainRole,
+                    "tonality": objInputValues.ton,
                     "onlyWithRiskFactors": false,
                 },
         

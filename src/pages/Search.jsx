@@ -26,12 +26,18 @@ class Search extends React.Component {
         this.setState({
             inputsValue: obj
         })
-        
-        histograms(obj);
     }
 
     getCheckBoxValue(obj) {
+        this.setState({
+            checkBoxValues: obj
+        })
+    }
 
+    startSearch() {
+        if (this.state.requiredData) {
+            histograms(this.state.inputsValue, this.state.checkBoxValues);
+        }
     }
 
     render() {
@@ -52,7 +58,10 @@ class Search extends React.Component {
                             <div className="search__form-wrapper">
 
                                 <InputFieldsForm inputValue={this.inputValue.bind(this)} />
-                                <CheckBoxFieldsForm requiredData={this.state.requiredData} />
+                                <CheckBoxFieldsForm
+                                    startSearch={this.startSearch.bind(this)}
+                                    getCheckBoxValue={this.getCheckBoxValue.bind(this)}
+                                    requiredData={this.state.requiredData} />
 
                             </div>
                         </form>
