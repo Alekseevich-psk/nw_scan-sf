@@ -11,8 +11,9 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
 
-        localStorage.setItem("resTotalDocuments", null);
-        localStorage.setItem("resRiskFactors", null);
+        localStorage.setItem('resTotalDocuments', null);
+        localStorage.setItem('resRiskFactors', null);
+
         this.startSearch = this.startSearch.bind(this);
 
         this.state = {
@@ -65,12 +66,12 @@ class Search extends React.Component {
             }).then(
                 result => {
                     this.props.preloader(false);
-                    localStorage.setItem("resTotalDocuments", JSON.stringify(result.data[0].data));
-                    localStorage.setItem("resRiskFactors", JSON.stringify(result.data[1].data));
+                    localStorage.setItem('resTotalDocuments', JSON.stringify(result.data[0].data));
+                    localStorage.setItem('resRiskFactors', JSON.stringify(result.data[1].data));
                 },
                 error => {
-                    localStorage.setItem("resTotalDocuments", null);
-                    localStorage.setItem("resRiskFactors", null);
+                    localStorage.setItem('resTotalDocuments', null);
+                    localStorage.setItem('resRiskFactors', null);
                     console.log(error);
                     this.props.preloader(false);
                 }

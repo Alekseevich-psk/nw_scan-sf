@@ -15,7 +15,6 @@ class LoginForm extends React.Component {
             redirectOnSearchPage: false
         }
 
-
     }
 
     handleClick(e) {
