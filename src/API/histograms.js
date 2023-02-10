@@ -1,9 +1,12 @@
-export default function histograms(objInputValues, objCheckBoxValues, resolve, reject) {
-
+export default function histograms(histograms, objInputValues, objCheckBoxValues, resolve, reject) {
     const token = localStorage.getItem("accessToken");
     if (!token) return;
 
-    fetch("https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms", {
+    let url = "https://gateway.scan-interfax.ru/api/v1/objectsearch/";
+
+    if (histograms) url = url + "histograms";
+
+    fetch(url, {
         method: "POST",
         headers: {
             Accept: "application/json",

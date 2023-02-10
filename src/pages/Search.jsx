@@ -6,13 +6,14 @@ import InputFieldsForm from "./../components/elements/InputFieldsForm";
 import CheckBoxFieldsForm from "./../components/elements/CheckBoxFieldsForm";
 import histograms from "./../api/histograms";
 
-class Search extends React.Component {
+export default class Search extends React.Component {
 
     constructor(props) {
         super(props);
 
         localStorage.setItem('resTotalDocuments', null);
         localStorage.setItem('resRiskFactors', null);
+        localStorage.setItem('encodedIds', null);
 
         this.startSearch = this.startSearch.bind(this);
 
@@ -62,7 +63,7 @@ class Search extends React.Component {
 
         if (true) {
             new Promise((resolve, reject) => {
-                histograms(this.state.inputValues, this.state.checkBoxValues, resolve, reject)
+                histograms(true, this.state.inputValues, this.state.checkBoxValues, resolve, reject)
             }).then(
                 result => {
                     this.props.preloader(false);
@@ -72,6 +73,21 @@ class Search extends React.Component {
                 error => {
                     localStorage.setItem('resTotalDocuments', null);
                     localStorage.setItem('resRiskFactors', null);
+                    console.log(error);
+                    this.props.preloader(false);
+                }
+            );
+
+            new Promise((resolve, reject) => {
+                histograms(false, this.state.inputValues, this.state.checkBoxValues, resolve, reject)
+            }).then(
+                result => {
+                    console.log(result);
+                    this.props.preloader(false);
+                    localStorage.setItem('encodedIds', JSON.stringify(result.items));
+                },
+                error => {
+                    localStorage.setItem('encodedIds', null);
                     console.log(error);
                     this.props.preloader(false);
                 }
@@ -116,18 +132,3 @@ class Search extends React.Component {
         )
     }
 }
-
-export default connect(
-    state => ({
-        resSearch: state.resSearch
-    }),
-    dispatch => ({
-        setResHistograms: (value) => {
-            dispatch({ type: "setResHistograms", value: value })
-        },
-        setResObjectSearch: (value) => {
-            dispatch({ type: "setResObjectSearch", value: value })
-        },
-
-    })
-)(Search);
