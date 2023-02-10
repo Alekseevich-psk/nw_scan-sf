@@ -2,7 +2,7 @@ import React from "react";
 import DocItem from "./../components/elements/DocItem";
 import ResInfo from "./../components/sections/ResInfo";
 
-export default function Res() {
+export default function Res(props) {
     return (
         <section className="res">
             <div className="container">

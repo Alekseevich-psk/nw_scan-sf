@@ -34,7 +34,7 @@ export default function login(login, password, resolve, reject) {
             return res.json();
         })
         .then((res) => {
-            console.log(res);
+            // console.log(res);
             localStorage.setItem("accessToken", res.accessToken);
             localStorage.setItem("expire", res.expire);
             resolve(res);

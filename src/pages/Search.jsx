@@ -1,7 +1,9 @@
 import React from "react";
+import { Navigate } from 'react-router-dom';
+import { connect } from "react-redux";
+
 import InputFieldsForm from "./../components/elements/InputFieldsForm";
 import CheckBoxFieldsForm from "./../components/elements/CheckBoxFieldsForm";
-// import objectSearch from "./../api/objectSearch";
 import histograms from "./../api/histograms";
 
 class Search extends React.Component {
@@ -9,14 +11,34 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
 
+        this.startSearch = this.startSearch.bind(this);
+
+        // console.log(props);
+
         this.state = {
-            inputsValue: null,
-            checkBoxValues: null,
-            requiredData: false
+            // inputValues: null,
+            inputValues: {
+                inn: '7710137066',
+                ton: 'any',
+                count: '12',
+                dateStart: "2023-02-01",
+                dateEnd: "2023-02-02",
+            },
+            // checkBoxValues: null,
+            checkBoxValues: {
+                maxFullness: true,
+                inBusinessNews: true,
+                onlyMainRole: true,
+                advertisement: true,
+                isDigest: true,
+            },
+            requiredData: false,
+            redirectResPage: false
         }
     }
 
     inputValue(status, obj) {
+
         this.setState({
             requiredData: status
         })
@@ -24,7 +46,7 @@ class Search extends React.Component {
         if (!status) return;
 
         this.setState({
-            inputsValue: obj
+            inputValues: obj
         })
     }
 
@@ -35,8 +57,25 @@ class Search extends React.Component {
     }
 
     startSearch() {
-        if (this.state.requiredData) {
-            histograms(this.state.inputsValue, this.state.checkBoxValues);
+        this.props.preloader(true);
+
+        if (true) {
+            new Promise((resolve, reject) => {
+                histograms(this.state.inputValues, this.state.checkBoxValues, resolve, reject)
+            }).then(
+                result => {
+                    this.props.setResHistograms(result);
+                    this.props.preloader(false);
+
+                    this.setState({
+                        redirectResPage: true
+                    })
+                },
+                error => {
+                    console.log(error);
+                    this.props.preloader(false);
+                }
+            )
         }
     }
 
@@ -56,7 +95,7 @@ class Search extends React.Component {
                         <div className="search__desc">Задайте параметры поиска.<br />Чем больше заполните, тем точнее поиск</div>
                         <form className="search__form">
                             <div className="search__form-wrapper">
-
+                                {this.state.redirectResPage ? (<Navigate to="/res" replace={true} />) : ''}
                                 <InputFieldsForm inputValue={this.inputValue.bind(this)} />
                                 <CheckBoxFieldsForm
                                     startSearch={this.startSearch.bind(this)}
@@ -74,4 +113,17 @@ class Search extends React.Component {
     }
 }
 
-export default Search;
+export default connect(
+    state => ({
+        resSearch: state.resSearch
+    }),
+    dispatch => ({
+        setResHistograms: (value) => {
+            dispatch({ type: "setResHistograms", value: value })
+        },
+        setResObjectSearch: (value) => {
+            dispatch({ type: "setResObjectSearch", value: value })
+        },
+
+    })
+)(Search);

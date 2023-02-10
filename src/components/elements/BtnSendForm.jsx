@@ -2,7 +2,6 @@ import React from "react";
 
 export default function BtnSendForm(props) {
 
-
     function onHandleClick(e) {
         e.preventDefault();
         props.startSearch();

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import login from "../../api/login.js";
+import { Navigate } from 'react-router-dom';
 
 class LoginForm extends React.Component {
 
@@ -11,8 +11,10 @@ class LoginForm extends React.Component {
         this.state = {
             inputNameValueDef: 'sf_student1',
             inputNamePassDef: 'Es#m*VvaA7',
-            errorForm: false
+            errorForm: false,
+            redirectOnSearchPage: false
         }
+
 
     }
 
@@ -24,7 +26,7 @@ class LoginForm extends React.Component {
         const loginStatus = new Promise((resolve, reject) => {
             login(this.inputNameValueDef.value, this.inputPassValue.value, resolve, reject);
         });
-        console.log(loginStatus);
+
         loginStatus
             .then(
                 result => {
@@ -33,7 +35,9 @@ class LoginForm extends React.Component {
                     this.props.editAuth(true);
                     this.setState({
                         errorForm: false,
+                        redirectOnSearchPage: true
                     });
+
                 },
                 error => {
                     // console.log(error);
@@ -49,6 +53,7 @@ class LoginForm extends React.Component {
     render() {
         return (
             <form className={"form__auth " + (this.state.errorForm ? "error-form" : "")}>
+                {this.state.redirectOnSearchPage ? (<Navigate to="/search" replace={true} />) : ''}
                 <div className="form__item">
                     <label htmlFor="name" className="form__label label">Логин или номер телефона:</label>
                     <input ref={(input) => this.inputNameValueDef = input} type="text" id="name" name="name" className="form__input input" defaultValue={this.state.inputNameValueDef} />
