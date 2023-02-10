@@ -1,6 +1,10 @@
-import DocItem from "./../elements/DocItem";
+import React, { useState } from "react";
 
-export default function News() {
+import DocItem from "./../elements/DocItem";
+// import documents from "./../../api/documents";
+
+export default function News(props) {
+
 
     return (
         <div className="res__news">

@@ -12,7 +12,7 @@ export default function documents(ids, resolve, reject) {
             Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-            ids: ["1:0JPQqdGM0JNWCdCzf2Jt0LHQotGV0ZUh0ZbRlBXCt0Je0JHQruKAnDcUXkZQ0YvQscKnehLRnNC1KtGK0Ll9BWLigLo/HXXCrhw="],
+            "ids": ids,
         }),
     })
         .then((res) => {

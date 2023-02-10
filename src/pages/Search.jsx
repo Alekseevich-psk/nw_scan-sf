@@ -1,19 +1,16 @@
 import React from "react";
 import { Navigate } from 'react-router-dom';
-import { connect } from "react-redux";
 
 import InputFieldsForm from "./../components/elements/InputFieldsForm";
 import CheckBoxFieldsForm from "./../components/elements/CheckBoxFieldsForm";
-import histograms from "./../api/histograms";
 
 export default class Search extends React.Component {
 
     constructor(props) {
         super(props);
 
-        localStorage.setItem('resTotalDocuments', null);
-        localStorage.setItem('resRiskFactors', null);
-        localStorage.setItem('encodedIds', null);
+        localStorage.setItem('inputValues', null);
+        localStorage.setItem('checkBoxValues', null);
 
         this.startSearch = this.startSearch.bind(this);
 
@@ -61,43 +58,75 @@ export default class Search extends React.Component {
     startSearch() {
         this.props.preloader(true);
 
-        if (true) {
-            new Promise((resolve, reject) => {
-                histograms(true, this.state.inputValues, this.state.checkBoxValues, resolve, reject)
-            }).then(
-                result => {
-                    this.props.preloader(false);
-                    localStorage.setItem('resTotalDocuments', JSON.stringify(result.data[0].data));
-                    localStorage.setItem('resRiskFactors', JSON.stringify(result.data[1].data));
-                },
-                error => {
-                    localStorage.setItem('resTotalDocuments', null);
-                    localStorage.setItem('resRiskFactors', null);
-                    console.log(error);
-                    this.props.preloader(false);
-                }
-            );
+        if (this.state.requiredData || true) {
 
-            new Promise((resolve, reject) => {
-                histograms(false, this.state.inputValues, this.state.checkBoxValues, resolve, reject)
-            }).then(
-                result => {
-                    console.log(result);
-                    this.props.preloader(false);
-                    localStorage.setItem('encodedIds', JSON.stringify(result.items));
-                },
-                error => {
-                    localStorage.setItem('encodedIds', null);
-                    console.log(error);
-                    this.props.preloader(false);
-                }
-            )
+            localStorage.setItem('inputValues', JSON.stringify(this.state.inputValues));
+            localStorage.setItem('checkBoxValues', JSON.stringify(this.state.checkBoxValues));
+
+            this.setState({
+                redirectResPage: true
+            })
+
+            // const resParseItems = [];
+
+            // new Promise((resolve, reject) => {
+            //     histograms(true, this.state.inputValues, this.state.checkBoxValues, resolve, reject)
+            // }).then(
+            //     result => {
+            //         this.props.preloader(false);
+            //         localStorage.setItem('resTotalDocuments', JSON.stringify(result.data[0].data));
+            //         localStorage.setItem('resRiskFactors', JSON.stringify(result.data[1].data));
+            //     },
+            //     error => {
+            //         localStorage.setItem('resTotalDocuments', null);
+            //         localStorage.setItem('resRiskFactors', null);
+            //         console.log(error);
+            //         this.props.preloader(false);
+            //     }
+            // );
+
+            // new Promise((resolve, reject) => {
+            //     histograms(false, this.state.inputValues, this.state.checkBoxValues, resolve, reject)
+            // }).then(
+            //     result => {
+
+            //         console.log(result);
+
+            //         result.items.forEach(element => {
+            //             resParseItems.push(element.encodedId)
+            //         });
+
+            //         this.getPost(resParseItems);
+            //         this.props.preloader(false);
+            //     },
+            //     error => {
+            //         localStorage.setItem('encodedIds', null);
+            //         console.log(error);
+            //         this.props.preloader(false);
+            //     }
+            // );
         }
-
-        this.setState({
-            redirectResPage: true
-        })
     }
+
+    // getPost(arrId) {
+    //     new Promise((resolve, reject) => {
+    //         documents(arrId, resolve, reject)
+    //     }).then(
+    //         result => {
+    //             console.log(result);
+    //             const resArr = [];
+
+    //             result.forEach(element => {
+    //                 resArr.push(element.ok);
+    //             });
+
+    //             localStorage.setItem('posts', JSON.stringify(resArr));
+    //         },
+    //         error => {
+    //             console.log(error);
+    //         }
+    //     );
+    // }
 
     render() {
         return (

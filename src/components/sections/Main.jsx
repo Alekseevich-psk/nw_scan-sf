@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 class Main extends React.Component {
     constructor(props) {
         super(props);
-
-
     }
 
     render() {
