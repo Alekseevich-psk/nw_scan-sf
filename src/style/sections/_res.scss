@@ -17,6 +17,10 @@
                 margin-bottom: 60px;
                 flex-direction: column;
             }
+
+            &.hide {
+                display: none;
+            }
         }
 
         &-inner {
@@ -43,6 +47,7 @@
     }
 
     &__info {
+        position: relative;
         margin-bottom: 80px;
 
         @media(max-width: 960px) {
@@ -55,6 +60,8 @@
         }
 
         &-slider {
+            position: relative;
+            width: 100%;
             border: 1px solid #029491;
             border-radius: 0 8px 8px 0;
             padding: 8px;

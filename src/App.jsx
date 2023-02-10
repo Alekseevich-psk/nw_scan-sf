@@ -48,7 +48,7 @@ class App extends React.Component {
                     <Routes>
                         <Route path="/" element={<Index />} />
                         <Route path="/search" element={<Search preloader={this.showPreloader.bind(this)} />} />
-                        <Route path="/auth" element={<Auth preloader={this.showPreloader.bind(this)} />} />
+                        <Route path="/auth" element={<Auth />} />
                         <Route path="/res" element={<Res />} />
                         <Route path="*" element={<NotFoundPage />} />
                     </Routes>

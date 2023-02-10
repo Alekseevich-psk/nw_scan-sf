@@ -11,9 +11,9 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
 
+        localStorage.setItem("resTotalDocuments", null);
+        localStorage.setItem("resRiskFactors", null);
         this.startSearch = this.startSearch.bind(this);
-
-        // console.log(props);
 
         this.state = {
             // inputValues: null,
@@ -21,7 +21,7 @@ class Search extends React.Component {
                 inn: '7710137066',
                 ton: 'any',
                 count: '12',
-                dateStart: "2023-02-01",
+                dateStart: "2022-02-01",
                 dateEnd: "2023-02-02",
             },
             // checkBoxValues: null,
@@ -64,19 +64,22 @@ class Search extends React.Component {
                 histograms(this.state.inputValues, this.state.checkBoxValues, resolve, reject)
             }).then(
                 result => {
-                    this.props.setResHistograms(result);
                     this.props.preloader(false);
-
-                    this.setState({
-                        redirectResPage: true
-                    })
+                    localStorage.setItem("resTotalDocuments", JSON.stringify(result.data[0].data));
+                    localStorage.setItem("resRiskFactors", JSON.stringify(result.data[1].data));
                 },
                 error => {
+                    localStorage.setItem("resTotalDocuments", null);
+                    localStorage.setItem("resRiskFactors", null);
                     console.log(error);
                     this.props.preloader(false);
                 }
             )
         }
+
+        this.setState({
+            redirectResPage: true
+        })
     }
 
     render() {
