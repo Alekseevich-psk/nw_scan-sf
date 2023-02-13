@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scandoc>
+    <sentence>МОСКВА, 30 декабря. /ТАСС/. </sentence>
+    <sentence>
+        <entity type="theme" local-id="6">
+            <entity type="theme" local-id="7">Президент <entity type="location" local-id="8">России </entity><entity
+                    type="person" local-id="0">Владимир Путин </entity>присвоил первому заместителю <entity
+                    type="person" local-id="1">гендиректора </entity><entity type="company"
+                    local-id="2">информационного агентства "Интерфакс"</entity>, одному из
+                "старожилов" кремлевского пула <entity type="person" local-id="1">Вячеславу Терехову </entity>звание
+                "Заслуженный журналист РФ". </entity>
+        </entity>
+    </sentence>
+    <sentence>Соответствующий указ опубликован в пятницу на официальном портале правовой
+        информации.&lt;/p&gt;&lt;p&gt;</sentence>
+    <sentence>
+        <entity type="theme" local-id="5">Согласно документу, <entity type="person" local-id="1">
+            Терехов </entity>получил почетное звание за "вклад в развитие отечественной журналистики
+            и многолетнюю плодотворную работу".&lt;/p&gt;&lt;p&gt;</entity>
+    </sentence>
+    <sentence><entity type="person" local-id="1">Вячеслав Терехов </entity>несколько десятилетий
+        работает в журналистике. </sentence>
+    <sentence><entity type="person" local-id="1">Он </entity>трудился в <entity type="company"
+            local-id="3">
+            <entity type="company" local-id="4">агентстве ТАСС </entity>
+        </entity>и
+        Иновещании, при его непосредственном участии создавались региональные информационные
+        структуры <entity type="company" local-id="2">"Интерфакса" </entity>в <entity
+            type="location" local-id="8">России</entity>, странах СНГ и дальнего зарубежья. </sentence>
+    <sentence>Неоднократно освещал события в горячих точках на постсоветском пространстве, в том
+        числе контртеррористические операции в <entity type="location" local-id="9">Чечне </entity>и
+        боевые действия в Южной Осетии. </sentence>
+    <sentence>С 1985 года <entity type="person" local-id="1">Терехов </entity>- постоянный участник
+        "кремлевского пула".&lt;/p&gt; &lt;/data&gt; </sentence>
+</scandoc>

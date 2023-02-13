@@ -25,7 +25,7 @@ export default function DocItem(props) {
                 <img src="./images/preview-news.jpg" alt="" />
             </div>
             <div className="n-item__desc">
-                {parserXml(el.content.markup)}
+                {/* {parserXml(el.content.markup)} */}
                 {/* {el.content.markup} */}
             </div>
             <div className="n-item__align">

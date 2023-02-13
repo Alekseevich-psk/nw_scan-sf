@@ -21,7 +21,7 @@ class Search extends React.Component {
                 inn: '7710137066',
                 ton: 'any',
                 count: '2',
-                dateStart: "2022-12-30",
+                dateStart: "2022-06-30",
                 dateEnd: "2023-02-02",
             },
             // checkBoxValues: null,
