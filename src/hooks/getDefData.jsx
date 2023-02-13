@@ -1,7 +1,7 @@
 import histograms from '../api/histograms';
 
 export default function getDefData() {
-    localStorage.setItem('resUseDefData', 'null');
+
     let res = {
         histograms: null,
         objectSearch: null

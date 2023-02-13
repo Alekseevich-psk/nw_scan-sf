@@ -1,9 +1,14 @@
 import React from "react";
 // import parserXml from "./../../hooks/parserXml";
 
+function declOfNum(number, titles) {
+    const cases = [2, 0, 1, 1, 1, 2];
+    return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+}
+
 export default function DocItem(props) {
     const el = props.el;
-    console.log(el);
+    // console.log(el);
     return (
         <div className="res__news-item n-item">
             <div className="n-item__info">
@@ -25,7 +30,7 @@ export default function DocItem(props) {
             </div>
             <div className="n-item__align">
                 <a href={el.url} target="_blank" className="n-item__btn">Читать в источнике</a>
-                <div className="n-item__more">{el.attributes.wordCount} слова</div>
+                <div className="n-item__more">{el.attributes.wordCount} {declOfNum(el.attributes.wordCount, ['слово', 'слова', 'слов'])}</div>
             </div>
         </div>
     )

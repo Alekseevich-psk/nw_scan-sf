@@ -7,27 +7,21 @@ import documents from "./../../api/documents";
 
 function News(props) {
 
-    let postList = null;
-    let posts = null;
+    const [posts, setPosts] = useState(null);
+    let postList;
 
     useEffect(() => {
-        if (props.resSearch.objectSearch.length > 0) {
-            console.log(props);
-            localStorage.setItem('posts', JSON.stringify(props.resSearch.objectSearch));
-        }
-    }, []);
-
-    posts = JSON.parse(localStorage.getItem('posts'));
+        setPosts(props.posts);
+    });
 
     if (posts === null) return;
-    // if (posts === null || typeof posts === 'object') return;
 
     postList = posts.map((el, index) => {
         return <DocItem key={index} el={el.ok} />
     })
 
     return (
-        <div className="res__news">
+        <div className={"res__news " + (props.usePreloader ? 'hide' : "")}>
             <h2 className="res__news-sub-title sub-title">Список документов</h2>
             <div className="res__news-wrapper">
                 {postList}

@@ -4,15 +4,13 @@ import { connect } from "react-redux";
 
 import InputFieldsForm from "./../components/elements/InputFieldsForm";
 import CheckBoxFieldsForm from "./../components/elements/CheckBoxFieldsForm";
-import getDefData from "./../hooks/getDefData";
-import getPostInit from "./../hooks/getPostsInit";
 
 class Search extends React.Component {
 
     constructor(props) {
         super(props);
 
-        const resetLocalStorage = ['inputValues', 'checkBoxValues', 'resUseDefData', 'postsIds'];
+        const resetLocalStorage = ['inputValues', 'checkBoxValues'];
         resetLocalStorage.forEach(element => localStorage.setItem(element, null));
 
         this.startSearch = this.startSearch.bind(this);
@@ -64,41 +62,9 @@ class Search extends React.Component {
         this.props.preloader(true);
 
         if (this.state.requiredData || true) {
-
             localStorage.setItem('inputValues', JSON.stringify(this.state.inputValues));
             localStorage.setItem('checkBoxValues', JSON.stringify(this.state.checkBoxValues));
-
-            const promise = getDefData();
-            let err = null;
-
-            promise.histograms.then(
-                result => {
-                    this.props.setResHistograms(result);
-                },
-                error => { err = error }
-            );
-
-            promise.objectSearch.then(
-                result => {
-           
-                    if (result.items.length > 0) {
-                        getPostInit(result).then(
-                            res => {
-                                console.log(result);
-                                this.props.setResObjectSearch(res);
-                            },
-                            err => {
-                                console.log(err);
-                                localStorage.setItem('posts', JSON.stringify(null));
-                            }
-                        );
-                    }
-
-                },
-                error => { err = error }
-            );
-
-            (err === null) ? this.setState({ redirectResPage: true }) : console.log(err);
+            this.setState({ redirectResPage: true });
         }
     }
 

@@ -7,21 +7,16 @@ import { connect } from "react-redux";
 function ResInfo(props) {
 
     const swiperRef = useRef();
-    let resInfo = null;
+    const [resInfo, setResInfo] = useState(null);
 
     useEffect(() => {
-        if (props.resSearch.length > 0) {
-            localStorage.setItem('resUseDefData', JSON.stringify(props.resSearch));
-            props.getStatusWork(true, 'resInfo');
-        }
-
+        setResInfo(props.histogramsResult);
     });
 
-    resInfo = JSON.parse(localStorage.getItem('resUseDefData'));
     if (resInfo === null) return;
-    
-    const totalDocuments = resInfo['0'].data;
-    const riskFactors = resInfo['1'].data;
+
+    const totalDocuments = resInfo.data['0'].data;
+    const riskFactors = resInfo.data['1'].data;
 
     const listSlide = totalDocuments.map((el, i) =>
         <SwiperSlide key={i} className="res__info-slide swiper-slide">
@@ -32,7 +27,7 @@ function ResInfo(props) {
     );
 
     return (
-        <div className="res__info">
+        <div className={"res__info " + (props.usePreloader ? 'hide' : "")}>
             <h2 className="res__info-sub-title sub-title">Общая сводка</h2>
             <div className="res__info-desc">Найдено {totalDocuments.length} вариантов</div>
 
