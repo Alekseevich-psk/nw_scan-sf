@@ -12,13 +12,21 @@ class Header extends React.Component {
         this.state = {
             limitCompany: null,
             usedCompany: null,
-            showPreloader: true
+            showPreloader: true,
+            openMobileMenu: false
         }
     }
 
     handleClick() {
         localStorage.clear();
         this.props.editAuth(false);
+    }
+
+    btnMobileMenu(e) {
+        console.log(this.state.openMobileMenu);
+        this.setState({
+            openMobileMenu: !this.state.openMobileMenu
+        })
     }
 
     componentDidMount() {
@@ -55,8 +63,8 @@ class Header extends React.Component {
                     <div className="header__wrapper">
                         <Link to="/" className="header__inner header__inner--logo"></Link>
                         <div className="header__inner header__inner--nav">
-                            <div className="header__nav nav">
-                                <div className="nav__btn"></div>
+                            <div className={"header__nav nav " + (this.state.openMobileMenu ? 'active' : '')}>
+                                <div className="nav__btn" onClick={this.btnMobileMenu.bind(this)}></div>
                                 <ul className="nav__list">
                                     <li className="nav__item">
                                         <Link to="/" className="nav__link">Главная</Link>
