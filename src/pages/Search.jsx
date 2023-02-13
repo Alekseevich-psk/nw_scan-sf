@@ -1,16 +1,19 @@
 import React from "react";
 import { Navigate } from 'react-router-dom';
+import { connect } from "react-redux";
 
 import InputFieldsForm from "./../components/elements/InputFieldsForm";
 import CheckBoxFieldsForm from "./../components/elements/CheckBoxFieldsForm";
+import getDefData from "./../hooks/getDefData";
+import getPostInit from "./../hooks/getPostsInit";
 
-export default class Search extends React.Component {
+class Search extends React.Component {
 
     constructor(props) {
         super(props);
 
-        localStorage.setItem('inputValues', null);
-        localStorage.setItem('checkBoxValues', null);
+        const resetLocalStorage = ['inputValues', 'checkBoxValues', 'resUseDefData', 'postsIds']
+        resetLocalStorage.forEach(element => localStorage.setItem(element, null));
 
         this.startSearch = this.startSearch.bind(this);
 
@@ -19,8 +22,8 @@ export default class Search extends React.Component {
             inputValues: {
                 inn: '7710137066',
                 ton: 'any',
-                count: '12',
-                dateStart: "2022-02-01",
+                count: '2',
+                dateStart: "2022-12-30",
                 dateEnd: "2023-02-02",
             },
             // checkBoxValues: null,
@@ -63,70 +66,34 @@ export default class Search extends React.Component {
             localStorage.setItem('inputValues', JSON.stringify(this.state.inputValues));
             localStorage.setItem('checkBoxValues', JSON.stringify(this.state.checkBoxValues));
 
-            this.setState({
-                redirectResPage: true
-            })
+            const promise = getDefData();
+            let err = null;
 
-            // const resParseItems = [];
+            promise.histograms.then(
+                result => {
+                    this.props.setResHistograms(result);
+                },
+                error => { err = error }
+            );
 
-            // new Promise((resolve, reject) => {
-            //     histograms(true, this.state.inputValues, this.state.checkBoxValues, resolve, reject)
-            // }).then(
-            //     result => {
-            //         this.props.preloader(false);
-            //         localStorage.setItem('resTotalDocuments', JSON.stringify(result.data[0].data));
-            //         localStorage.setItem('resRiskFactors', JSON.stringify(result.data[1].data));
-            //     },
-            //     error => {
-            //         localStorage.setItem('resTotalDocuments', null);
-            //         localStorage.setItem('resRiskFactors', null);
-            //         console.log(error);
-            //         this.props.preloader(false);
-            //     }
-            // );
+            promise.objectSearch.then(
+                result => {
+                    getPostInit(result).then(
+                        res => {
+                            this.props.setResObjectSearch(res);
+                        },
+                        err => {
+                            console.log(err);
+                            localStorage.setItem('posts', JSON.stringify(null));
+                        }
+                    );
+                },
+                error => { err = error }
+            );
 
-            // new Promise((resolve, reject) => {
-            //     histograms(false, this.state.inputValues, this.state.checkBoxValues, resolve, reject)
-            // }).then(
-            //     result => {
-
-            //         console.log(result);
-
-            //         result.items.forEach(element => {
-            //             resParseItems.push(element.encodedId)
-            //         });
-
-            //         this.getPost(resParseItems);
-            //         this.props.preloader(false);
-            //     },
-            //     error => {
-            //         localStorage.setItem('encodedIds', null);
-            //         console.log(error);
-            //         this.props.preloader(false);
-            //     }
-            // );
+            (err === null) ? this.setState({ redirectResPage: true }) : console.log(err);
         }
     }
-
-    // getPost(arrId) {
-    //     new Promise((resolve, reject) => {
-    //         documents(arrId, resolve, reject)
-    //     }).then(
-    //         result => {
-    //             console.log(result);
-    //             const resArr = [];
-
-    //             result.forEach(element => {
-    //                 resArr.push(element.ok);
-    //             });
-
-    //             localStorage.setItem('posts', JSON.stringify(resArr));
-    //         },
-    //         error => {
-    //             console.log(error);
-    //         }
-    //     );
-    // }
 
     render() {
         return (
@@ -161,3 +128,17 @@ export default class Search extends React.Component {
         )
     }
 }
+
+export default connect(
+    state => ({
+        resSearch: state.resSearch
+    }),
+    dispatch => ({
+        setResHistograms: (value) => {
+            dispatch({ type: "setResHistograms", value: value })
+        },
+        setResObjectSearch: (value) => {
+            dispatch({ type: "setResObjectSearch", value: value })
+        }
+    })
+)(Search);

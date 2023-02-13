@@ -13,7 +13,7 @@ export default function documents(ids, resolve, reject) {
         },
         body: JSON.stringify({
             "ids": ids,
-        }),
+        })
     })
         .then((res) => {
             if (res.status >= 200 && res.status < 300) {

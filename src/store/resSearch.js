@@ -4,15 +4,16 @@ const initialStore = {
 };
 
 function resSearch(state = initialStore, action) {
+
     switch (action.type) {
         case "setResHistograms":
             return (initialStore.histograms = action.value.data);
         case "setResObjectSearch":
-            return (initialStore.objectSearch = { objectSearch: action.value });
+            initialStore.objectSearch = action.value;
+            return initialStore;
         default:
             return state;
     }
 }
-
 
 export default resSearch;

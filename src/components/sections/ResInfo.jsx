@@ -1,48 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { useRef } from 'react';
-import histograms from "./../../api/histograms";
+import { connect } from "react-redux";
 
-
-export default function ResInfo(props) {
+function ResInfo(props) {
     const swiperRef = useRef();
-    let listSlide = null;
+    let resInfo = null;
 
-    const [resDate, setResDate] = useState(null);
-    const [resRisk, setResRisk] = useState(null);
-    const [resCount, setCount] = useState(null);
+    useEffect(() => {
+        if (props.resSearch.length > 0) {
+            localStorage.setItem('resUseDefData', JSON.stringify(props.resSearch));
+        }
+    });
 
-    const inputValues = JSON.parse(localStorage.getItem('inputValues'));
-    const checkBoxValues = JSON.parse(localStorage.getItem('checkBoxValues'));
+    resInfo = JSON.parse(localStorage.getItem('resUseDefData'));
 
-    if (resDate === null) {
-        new Promise((resolve, reject) => {
-            histograms(true, inputValues, checkBoxValues, resolve, reject)
-        }).then(
-            result => {
-                setResDate(result.data[0].data);
-                setResRisk(result.data[1].data);
-                setCount(result.data[0].data.length);
-            },
-            error => {
-                console.log(error);
-            }
-        );
-    } else {
-        listSlide = resDate.map((el, i) =>
-            <SwiperSlide key={i} className="res__info-slide swiper-slide">
-                <div className="res__info-date">{el.date.slice(0, 10)}</div>
-                <div className="res__info-cont">{el.value}</div>
-                <div className="res__info-cont">{resRisk[i].value}</div>
-            </SwiperSlide>
-        );
-    }
+    if(resInfo === null) return;
+
+    const totalDocuments = resInfo['0'].data;
+    const riskFactors = resInfo['1'].data;
+
+    const listSlide = totalDocuments.map((el, i) =>
+        <SwiperSlide key={i} className="res__info-slide swiper-slide">
+            <div className="res__info-date">{el.date.slice(0, 10)}</div>
+            <div className="res__info-cont">{el.value}</div>
+            <div className="res__info-cont">{riskFactors[i].value}</div>
+        </SwiperSlide>
+    );
 
     return (
         <div className="res__info">
             <h2 className="res__info-sub-title sub-title">Общая сводка</h2>
-            <div className="res__info-desc">Найдено {resCount} вариантов</div>
+            <div className="res__info-desc">Найдено {totalDocuments.length} вариантов</div>
 
             <div className="res__info-slider-wrap">
 
@@ -85,3 +75,9 @@ export default function ResInfo(props) {
         </div>
     )
 }
+
+export default connect(
+    state => ({
+        resSearch: state.resSearch
+    }),
+)(ResInfo);

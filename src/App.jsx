@@ -43,7 +43,7 @@ class App extends React.Component {
             <div>
 
                 <BrowserRouter>
-                    <Preloader preloader={this.state.preloader} />
+                    {/* <Preloader preloader={this.state.preloader} /> */}
                     <Header />
                     <Routes>
                         <Route path="/" element={<Index />} />
