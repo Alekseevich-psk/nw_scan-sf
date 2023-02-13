@@ -63,6 +63,10 @@ export default function Res(props) {
 
     }, []);
 
+    const moreBtn = () => {
+        console.log('test');
+    }
+
     return (
         <section className="res">
             <div className={"container " + (errSearchText ? 'hide' : '')}>
@@ -84,6 +88,9 @@ export default function Res(props) {
                     usePreloader={preloader}
                     posts={posts} />
                 <Preloader preloader={preloader} />
+                <div className="res__align">
+                    <button onClick={moreBtn}>Показать еще</button>
+                </div>
             </div>
             <div className={"container " + (errSearchText ? '' : 'hide')}>
                 <h1 className="res__main-s-title s-title">Ничего не найдено!</h1>

@@ -20,7 +20,7 @@ class Search extends React.Component {
             inputValues: {
                 inn: '7710137066',
                 ton: 'any',
-                count: '2',
+                count: '4',
                 dateStart: "2022-06-30",
                 dateEnd: "2023-02-02",
             },

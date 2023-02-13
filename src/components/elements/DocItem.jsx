@@ -8,7 +8,7 @@ function declOfNum(number, titles) {
 
 export default function DocItem(props) {
     const el = props.el;
-    // console.log(el.content.markup);
+    // console.log(el);
     return (
         <div className="res__news-item n-item">
             <div className="n-item__info">
@@ -26,7 +26,7 @@ export default function DocItem(props) {
             </div>
             <div className="n-item__desc">
                 {/* {parserXml(el.content.markup)} */}
-                {/* {el.content.markup} */}
+                {/* <xmp>{el.content.markup}</xmp> */}
             </div>
             <div className="n-item__align">
                 <a href={el.url} target="_blank" className="n-item__btn">Читать в источнике</a>
