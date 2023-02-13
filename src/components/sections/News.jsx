@@ -11,8 +11,7 @@ function News(props) {
     let posts = null;
 
     useEffect(() => {
-        console.log(props);
-        if (props.resSearch.objectSearch.length >= 1) {
+        if (props.resSearch && props.resSearch.objectSearch.length >= 1) {
             localStorage.setItem('posts', JSON.stringify(props.resSearch.objectSearch));
         }
     }, []);

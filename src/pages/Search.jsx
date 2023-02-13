@@ -18,9 +18,9 @@ class Search extends React.Component {
         this.startSearch = this.startSearch.bind(this);
 
         this.state = {
-            // inputValues: null,
+            // inputValues: null,7710137066
             inputValues: {
-                inn: '7710137066',
+                inn: '600101625380',
                 ton: 'any',
                 count: '2',
                 dateStart: "2022-12-30",
@@ -50,6 +50,8 @@ class Search extends React.Component {
         this.setState({
             inputValues: obj
         })
+
+        console.log(obj);
     }
 
     getCheckBoxValue(obj) {
@@ -71,6 +73,7 @@ class Search extends React.Component {
 
             promise.histograms.then(
                 result => {
+                    console.log(result);
                     this.props.setResHistograms(result);
                 },
                 error => { err = error }
@@ -78,15 +81,20 @@ class Search extends React.Component {
 
             promise.objectSearch.then(
                 result => {
-                    getPostInit(result).then(
-                        res => {
-                            this.props.setResObjectSearch(res);
-                        },
-                        err => {
-                            console.log(err);
-                            localStorage.setItem('posts', JSON.stringify(null));
-                        }
-                    );
+
+                    if (result.items.length > 0) {
+                        getPostInit(result).then(
+                            res => {
+                                console.log(result);
+                                this.props.setResObjectSearch(res);
+                            },
+                            err => {
+                                console.log(err);
+                                localStorage.setItem('posts', JSON.stringify(null));
+                            }
+                        );
+                    }
+
                 },
                 error => { err = error }
             );

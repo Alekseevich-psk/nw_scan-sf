@@ -39,7 +39,7 @@ export default function InputDate(props) {
         const today = formatDate(new Date());
 
         for (let i = 0; i < res.length; i++) {
-            if (res[i]  > today) {
+            if (res[i] > today) {
                 setError(true);
                 setTextError('даты не должны быть в будущем времени');
                 return;

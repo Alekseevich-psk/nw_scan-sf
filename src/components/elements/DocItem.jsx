@@ -1,4 +1,5 @@
 import React from "react";
+// import parserXml from "./../../hooks/parserXml";
 
 export default function DocItem(props) {
     const el = props.el;
@@ -19,6 +20,7 @@ export default function DocItem(props) {
                 <img src="./images/preview-news.jpg" alt="" />
             </div>
             <div className="n-item__desc">
+                {/* {parserXml(el.content.markup)} */}
                 {/* {el.content.markup} */}
             </div>
             <div className="n-item__align">

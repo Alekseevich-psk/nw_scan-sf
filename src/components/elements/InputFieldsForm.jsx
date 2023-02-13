@@ -9,6 +9,10 @@ class InputFieldsForm extends React.Component {
         super(props);
 
         this.state = {
+            defValue: {
+                inn: '7710137066',
+                count: '8'
+            },
             inputValues: {
                 inn: null,
                 ton: null,
@@ -71,6 +75,7 @@ class InputFieldsForm extends React.Component {
             <div className="search__form-inner">
 
                 <Input
+                    defValue={this.state.defValue.inn}
                     label={'ИНН компании'}
                     getInputValue={this.getInputValue.bind(this)}
                     placeholder={'10 цифр'}
@@ -82,6 +87,7 @@ class InputFieldsForm extends React.Component {
                 <Options getInputValue={this.getInputValue.bind(this)} />
 
                 <Input
+                    defValue={this.state.defValue.count}
                     label={'Количество документов в выдаче'}
                     getInputValue={this.getInputValue.bind(this)}
                     placeholder={'От 1 до 1000'}
