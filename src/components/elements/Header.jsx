@@ -1,4 +1,5 @@
 import React from "react";
+import { HashLink } from 'react-router-hash-link';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import profileInfo from "../../api/profileInfo";
@@ -70,10 +71,10 @@ class Header extends React.Component {
                                         <Link to="/" className="nav__link">Главная</Link>
                                     </li>
                                     <li className="nav__item">
-                                        <a href="#tariff" className="nav__link">Тарифы</a>
+                                        <HashLink to="/#tariff" className="nav__link">Тарифы</HashLink>
                                     </li>
                                     <li className="nav__item">
-                                        <a href="/faq" className="nav__link">FAQ</a>
+                                        <Link to="/faq" className="nav__link">FAQ</Link>
                                     </li>
                                 </ul>
                             </div>

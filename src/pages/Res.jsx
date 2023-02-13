@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import News from "./../components/sections/News";
 import ResInfo from "./../components/sections/ResInfo";
@@ -9,6 +9,9 @@ import getDefData from "./../hooks/getDefData";
 import getPostsInit from "./../hooks/getPostsInit";
 
 export default function Res(props) {
+    const navigate = useNavigate();
+    const mainData = localStorage.getItem('inputValues');
+    if (mainData === 'null') navigate("/search");
 
     const [err, setErr] = useState(false);
     const [errSearch, setErrSearch] = useState(false);
