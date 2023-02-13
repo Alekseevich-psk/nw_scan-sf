@@ -9,7 +9,6 @@ export default function getPostInit(data) {
     });
 
     return new Promise((resolve, reject) => {
-        console.log(idsArr);
         documents(idsArr, resolve, reject);
     })
 }
