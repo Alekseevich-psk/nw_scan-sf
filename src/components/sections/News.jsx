@@ -11,7 +11,8 @@ function News(props) {
     let posts = null;
 
     useEffect(() => {
-        if (props.resSearch && props.resSearch.objectSearch.length >= 1) {
+        if (props.resSearch.objectSearch.length > 0) {
+            console.log(props);
             localStorage.setItem('posts', JSON.stringify(props.resSearch.objectSearch));
         }
     }, []);
@@ -19,6 +20,7 @@ function News(props) {
     posts = JSON.parse(localStorage.getItem('posts'));
 
     if (posts === null) return;
+    // if (posts === null || typeof posts === 'object') return;
 
     postList = posts.map((el, index) => {
         return <DocItem key={index} el={el.ok} />

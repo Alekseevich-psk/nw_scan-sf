@@ -1,6 +1,6 @@
 const initialStore = {
     histograms: [],
-    objectSearch: {},
+    objectSearch: [],
 };
 
 function resSearch(state = initialStore, action) {

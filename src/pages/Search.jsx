@@ -12,15 +12,15 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
 
-        const resetLocalStorage = ['inputValues', 'checkBoxValues', 'resUseDefData', 'postsIds']
+        const resetLocalStorage = ['inputValues', 'checkBoxValues', 'resUseDefData', 'postsIds'];
         resetLocalStorage.forEach(element => localStorage.setItem(element, null));
 
         this.startSearch = this.startSearch.bind(this);
 
         this.state = {
-            // inputValues: null,7710137066
+            // inputValues: null,7710137066 600101625380
             inputValues: {
-                inn: '600101625380',
+                inn: '7710137066',
                 ton: 'any',
                 count: '2',
                 dateStart: "2022-12-30",
@@ -73,7 +73,6 @@ class Search extends React.Component {
 
             promise.histograms.then(
                 result => {
-                    console.log(result);
                     this.props.setResHistograms(result);
                 },
                 error => { err = error }
@@ -81,7 +80,7 @@ class Search extends React.Component {
 
             promise.objectSearch.then(
                 result => {
-
+           
                     if (result.items.length > 0) {
                         getPostInit(result).then(
                             res => {

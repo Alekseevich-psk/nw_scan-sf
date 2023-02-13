@@ -28,6 +28,7 @@ export default function documents(ids, resolve, reject) {
             return data.json();
         })
         .then((data) => {
+            console.log(data);
             resolve(data);
         })
         .catch((e) => {

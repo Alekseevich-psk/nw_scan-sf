@@ -5,19 +5,21 @@ import { useRef } from 'react';
 import { connect } from "react-redux";
 
 function ResInfo(props) {
+
     const swiperRef = useRef();
     let resInfo = null;
 
     useEffect(() => {
         if (props.resSearch.length > 0) {
             localStorage.setItem('resUseDefData', JSON.stringify(props.resSearch));
+            props.getStatusWork(true, 'resInfo');
         }
+
     });
 
     resInfo = JSON.parse(localStorage.getItem('resUseDefData'));
-
-    if(resInfo === null) return;
-
+    if (resInfo === null) return;
+    
     const totalDocuments = resInfo['0'].data;
     const riskFactors = resInfo['1'].data;
 
