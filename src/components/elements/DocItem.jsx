@@ -1,5 +1,5 @@
 import React from "react";
-// import parserXml from "./../../hooks/parserXml";
+import parserXml from "./../../hooks/parserXml";
 
 function declOfNum(number, titles) {
     const cases = [2, 0, 1, 1, 1, 2];
@@ -8,7 +8,7 @@ function declOfNum(number, titles) {
 
 export default function DocItem(props) {
     const el = props.el;
-    // console.log(el);
+    // console.log(el.content.markup);
     return (
         <div className="res__news-item n-item">
             <div className="n-item__info">
@@ -25,7 +25,7 @@ export default function DocItem(props) {
                 <img src="./images/preview-news.jpg" alt="" />
             </div>
             <div className="n-item__desc">
-                {/* {parserXml(el.content.markup)} */}
+                {parserXml(el.content.markup)}
                 {/* {el.content.markup} */}
             </div>
             <div className="n-item__align">

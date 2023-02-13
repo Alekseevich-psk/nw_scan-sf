@@ -1,8 +1,9 @@
-const convert = require('xml-js');
+const XMLParser = require('react-xml-parser');
 
 export default function parserXml(value) {
-    let xml = value;
-    const result1 = convert.xml2json(xml, { compact: true, spaces: 4 });
-    const result2 = convert.xml2json(xml, { compact: false, spaces: 4 });
-    console.log(result1, '\n', result2);
+
+    const xml = new XMLParser().parseFromString(value);    // Assume xmlText contains the example XML
+    console.log(xml);
+    // console.log(xml.getElementsByTagName('Name'));
 }
+
