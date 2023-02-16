@@ -15,6 +15,7 @@ export default function Res(props) {
 
     const [err, setErr] = useState(false);
     const [errSearch, setErrSearch] = useState(false);
+    const [flagNewPost, setFlagNewPost] = useState(false);
     const [errSearchText, setErrSearchText] = useState(false);
     const [preloader, setPreloader] = useState(true);
     const [histogramsResult, setHistogramsResult] = useState(null);
@@ -41,19 +42,7 @@ export default function Res(props) {
         promise.objectSearch.then(
             res => {
                 if (res.items.length <= 0) return;
-                getPostsInit(res).then(
-                    result => {
-                        if (result.length <= 0) return;
-                        setInterval(() => {
-                            setPreloader(false);
-                        }, 1500);
-                        setPosts(result);
-                    },
-                    err => {
-                        console.log(err);
-                        setErr(err);
-                    }
-                )
+                getPosts(res);
             },
             err => {
                 console.log(err);
@@ -64,7 +53,41 @@ export default function Res(props) {
     }, []);
 
     const moreBtn = () => {
-        console.log('test');
+        const ids = JSON.parse(localStorage.getItem('idsHide'));
+        getPosts(ids, 'newPost');
+    }
+
+    function setPostsStore(res) {
+        const posts = localStorage.getItem('posts');
+
+        if (posts !== null) {
+            const postsStore = JSON.parse(localStorage.getItem('posts'));
+            res.forEach(element => {
+                postsStore.push(element);
+            });
+  
+            localStorage.setItem('posts', JSON.stringify(postsStore));
+        } else {
+            localStorage.setItem('posts', JSON.stringify(res));
+        }
+
+        setPosts(res);
+    }
+
+    const getPosts = (arr, status = null) => {
+        getPostsInit(arr, status).then(
+            result => {
+                if (result.length <= 0) return;
+                setInterval(() => {
+                    setPreloader(false);
+                }, 1500);
+                setPostsStore(result);
+            },
+            err => {
+                console.log(err);
+                setErr(err);
+            }
+        )
     }
 
     return (

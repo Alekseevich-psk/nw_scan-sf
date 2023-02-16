@@ -1,7 +1,6 @@
 export default function documents(ids, resolve, reject) {
     const token = localStorage.getItem("accessToken");
     if (!token) return;
-
     let url = "https://gateway.scan-interfax.ru/api/v1/documents";
 
     fetch(url, {
@@ -28,7 +27,6 @@ export default function documents(ids, resolve, reject) {
             return data.json();
         })
         .then((data) => {
-            console.log(data);
             resolve(data);
         })
         .catch((e) => {

@@ -14,9 +14,12 @@ function News(props) {
         setPosts(props.posts);
     });
 
+
     if (posts === null) return;
 
-    postList = posts.map((el, index) => {
+    const postsStore = JSON.parse(localStorage.getItem('posts'));
+    // console.log(postsStore);
+    postList = postsStore.map((el, index) => {
         return <DocItem key={index} el={el.ok} />
     })
 

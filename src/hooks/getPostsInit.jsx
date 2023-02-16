@@ -1,11 +1,23 @@
-import documents from "./../api/documents";
+import documents from "../api/documents";
 
-export default function getPostInit(data) {
-    const idsArr = [];
+export default function getPostsInit(data, status) {
+    let idsArr = [];
 
-    data.items.forEach(element => {
-        idsArr.push(element.encodedId);
-    });
+
+    if (status == 'newPost') {
+        idsArr = data;
+    } else {
+        data.items.forEach(element => {
+            idsArr.push(element.encodedId);
+        });
+        console.log(data);
+    }
+
+    if (idsArr.length >= 11) {
+        localStorage.setItem('idsHide', JSON.stringify(idsArr.splice(10, (idsArr.length - 10))))
+    } else {
+        localStorage.setItem('idsHide', JSON.stringify(null));
+    }
 
     return new Promise((resolve, reject) => {
         documents(idsArr, resolve, reject);
