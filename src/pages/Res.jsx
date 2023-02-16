@@ -89,7 +89,7 @@ export default function Res(props) {
                     posts={posts} />
                 <Preloader preloader={preloader} />
                 <div className="res__align">
-                    <button onClick={moreBtn}>Показать еще</button>
+                    <button className="res__more-btn" onClick={moreBtn}>Показать еще</button>
                 </div>
             </div>
             <div className={"container " + (errSearchText ? '' : 'hide')}>

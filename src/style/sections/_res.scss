@@ -121,4 +121,28 @@
         }
     }
 
+    &__align {
+        padding-top: 20px;
+        text-align: center;
+    }
+
+    &__more-btn {
+        text-align: center;
+        width: 220px;
+        cursor: pointer;
+        background-color: $bg;
+        padding: 12px 0;
+        border-radius: $br;
+        color: $white;
+        transition: $tr;
+
+        &:hover {
+            background-color: #05aca9;
+        }
+
+        &:active {
+            background-color: #025250;
+        }
+    }
+
 }
