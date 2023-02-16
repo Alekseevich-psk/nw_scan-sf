@@ -11,12 +11,21 @@
 
     &__info {
         opacity: 0.6;
+        display: flex;
+
+        @media(max-width: 768px) {
+            flex-direction: column;
+        }
     }
 
     &__date,
     &__source {
-        display: inline-block;
         color: $black;
+    }
+
+    &__date {
+        min-width: 90px;
+        max-width: 90px;
     }
 
     &__source {
@@ -26,6 +35,10 @@
 
         @media (max-width: 960px) {
             margin-bottom: 16px;
+        }
+
+        @media(max-width: 768px) {
+            margin-left: 0;
         }
     }
 
