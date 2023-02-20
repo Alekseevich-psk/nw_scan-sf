@@ -22,26 +22,15 @@ export default function login(login, password, resolve, reject) {
                 throw error;
             }
         })
-        // .then((res) => {
-        //     if (res.headers["content-type"] !== "application/json") {
-        //         let error = new Error("Некорректный ответ от сервера");
-        //         error.response = res;
-        //         throw error;
-        //     }
-        //     return res;
-        // })
         .then((res) => {
             return res.json();
         })
         .then((res) => {
-            // console.log(res);
             localStorage.setItem("accessToken", res.accessToken);
             localStorage.setItem("expire", res.expire);
             resolve(res);
         })
         .catch((e) => {
-            // console.log("Error: " + e.message);
-            // console.log(e.response);
             reject("Error: " + e.message);
         });
 }

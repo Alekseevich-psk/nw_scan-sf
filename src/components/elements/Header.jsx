@@ -9,7 +9,7 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
-
+        console.log(props);
         this.state = {
             limitCompany: null,
             usedCompany: null,
@@ -40,6 +40,7 @@ class Header extends React.Component {
             profileInfoStatus
                 .then(
                     result => {
+                        console.log(result);
                         this.setState({
                             limitCompany: result.eventFiltersInfo.companyLimit,
                             usedCompany: result.eventFiltersInfo.usedCompanyCount,
