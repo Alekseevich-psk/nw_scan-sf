@@ -9,7 +9,7 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
             limitCompany: null,
             usedCompany: null,
@@ -21,10 +21,12 @@ class Header extends React.Component {
     handleClick() {
         localStorage.clear();
         this.props.editAuth(false);
+        this.setState({
+            openMobileMenu: !this.state.openMobileMenu
+        })
     }
 
     btnMobileMenu(e) {
-        console.log(this.state.openMobileMenu);
         this.setState({
             openMobileMenu: !this.state.openMobileMenu
         })
@@ -76,6 +78,12 @@ class Header extends React.Component {
                                     </li>
                                     <li className="nav__item">
                                         <Link to="/faq" className="nav__link">FAQ</Link>
+                                    </li>
+                                    <li className="nav__item nav__item--out">
+                                        <Link
+                                            to="/"
+                                            onClick={this.handleClick.bind(this)}
+                                            className={"header__btn-out " + (this.props.authStore.auth ? 'show' : 'hide')}>Выйти из аккаунта</Link>
                                     </li>
                                 </ul>
                             </div>

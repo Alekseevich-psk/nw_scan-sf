@@ -45,7 +45,9 @@
 
         &--user {
             @media(max-width: 960px) {
-                display: none;
+                .header__user--auth {
+                    display: none;
+                }
             }
         }
     }
