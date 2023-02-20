@@ -14,8 +14,7 @@ export default function Res(props) {
     if (mainData === 'null') navigate("/search");
 
     const [err, setErr] = useState(false);
-    const [errSearch, setErrSearch] = useState(false);
-    const [flagNewPost, setFlagNewPost] = useState(false);
+    const [showBtnMorePost, setShowBtnMorePost] = useState(false);
     const [errSearchText, setErrSearchText] = useState(false);
     const [preloader, setPreloader] = useState(true);
     const [histogramsResult, setHistogramsResult] = useState(null);
@@ -39,6 +38,8 @@ export default function Res(props) {
 
         if (errSearchText) return;
 
+        localStorage.setItem('posts', JSON.stringify(null));
+
         promise.objectSearch.then(
             res => {
                 if (res.items.length <= 0) return;
@@ -52,42 +53,44 @@ export default function Res(props) {
 
     }, []);
 
-    const moreBtn = () => {
-        const ids = JSON.parse(localStorage.getItem('idsHide'));
-        getPosts(ids, 'newPost');
-    }
-
-    function setPostsStore(res) {
-        const posts = localStorage.getItem('posts');
-
-        if (posts !== null) {
-            const postsStore = JSON.parse(localStorage.getItem('posts'));
-            res.forEach(element => {
-                postsStore.push(element);
-            });
-  
-            localStorage.setItem('posts', JSON.stringify(postsStore));
-        } else {
-            localStorage.setItem('posts', JSON.stringify(res));
-        }
-
-        setPosts(res);
-    }
-
     const getPosts = (arr, status = null) => {
         getPostsInit(arr, status).then(
             result => {
                 if (result.length <= 0) return;
+
                 setInterval(() => {
                     setPreloader(false);
                 }, 1500);
+
                 setPostsStore(result);
+
+                (JSON.parse(localStorage.getItem('idsHide')) === null) ?
+                    setShowBtnMorePost(false) : setShowBtnMorePost(true);
             },
             err => {
                 console.log(err);
                 setErr(err);
             }
-        )
+        );
+    }
+
+    function setPostsStore(res) {
+        const posts = JSON.parse(localStorage.getItem('posts'));
+        if (posts !== null) {
+            res.forEach(element => {
+                posts.push(element);
+            });
+            localStorage.setItem('posts', JSON.stringify(posts));
+        } else {
+            localStorage.setItem('posts', JSON.stringify(res));
+        }
+        setPosts(res);
+    }
+
+    const moreBtn = () => {
+        const ids = JSON.parse(localStorage.getItem('idsHide'));
+        if (ids === null) return;
+        getPosts(ids, 'newPost');
     }
 
     return (
@@ -111,7 +114,7 @@ export default function Res(props) {
                     usePreloader={preloader}
                     posts={posts} />
                 <Preloader preloader={preloader} />
-                <div className="res__align">
+                <div className={"res__align " + (showBtnMorePost ? 'show' : 'hide')}>
                     <button className="res__more-btn" onClick={moreBtn}>Показать еще</button>
                 </div>
             </div>
