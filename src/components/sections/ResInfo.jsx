@@ -4,6 +4,8 @@ import { Navigation } from 'swiper';
 import { useRef } from 'react';
 import { connect } from "react-redux";
 
+import declOfNum from "./../../hooks/declOfNum";
+
 function ResInfo(props) {
 
     const swiperRef = useRef();
@@ -29,7 +31,7 @@ function ResInfo(props) {
     return (
         <div className={"res__info " + (props.usePreloader ? 'hide' : "")}>
             <h2 className="res__info-sub-title sub-title">Общая сводка</h2>
-            <div className="res__info-desc">Найдено {totalDocuments.length} вариантов</div>
+            <div className="res__info-desc">Найдено: {totalDocuments.length} {declOfNum(totalDocuments.length, ['вариант', 'варианта', 'вариантов'])}</div>
 
             <div className="res__info-slider-wrap">
 
