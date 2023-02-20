@@ -78,7 +78,7 @@ class InputFieldsForm extends React.Component {
                     defValue={this.state.defValue.inn}
                     label={'ИНН компании'}
                     getInputValue={this.getInputValue.bind(this)}
-                    placeholder={'10 цифр'}
+                    placeholder={'10-12 цифр'}
                     validate={'length'}
                     id={'inn'}
                     type={'number'}

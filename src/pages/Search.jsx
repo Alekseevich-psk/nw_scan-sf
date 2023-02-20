@@ -16,22 +16,22 @@ class Search extends React.Component {
         this.startSearch = this.startSearch.bind(this);
 
         this.state = {
-            // inputValues: null,7710137066 600101625380
-            inputValues: {
-                inn: '7710137066',
-                ton: 'any',
-                count: '4',
-                dateStart: "2022-06-30",
-                dateEnd: "2023-02-02",
-            },
-            // checkBoxValues: null,
-            checkBoxValues: {
-                maxFullness: true,
-                inBusinessNews: true,
-                onlyMainRole: true,
-                advertisement: true,
-                isDigest: true,
-            },
+            inputValues: null,
+            // inputValues: {
+            //     inn: '7710137066',
+            //     ton: 'any',
+            //     count: '4',
+            //     dateStart: "2022-06-30",
+            //     dateEnd: "2023-02-02",
+            // },
+            checkBoxValues: null,
+            // checkBoxValues: {
+            //     maxFullness: true,
+            //     inBusinessNews: true,
+            //     onlyMainRole: true,
+            //     advertisement: true,
+            //     isDigest: true,
+            // },
             requiredData: false,
             redirectResPage: false
         }
@@ -48,8 +48,6 @@ class Search extends React.Component {
         this.setState({
             inputValues: obj
         })
-
-        console.log(obj);
     }
 
     getCheckBoxValue(obj) {

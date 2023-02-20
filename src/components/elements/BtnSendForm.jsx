@@ -12,7 +12,7 @@ export default function BtnSendForm(props) {
             <input
                 onClick={onHandleClick}
                 type="submit"
-                // disabled={(props.requiredData) ? "" : "disabled"}
+                disabled={(props.requiredData) ? "" : "disabled"}
                 className={"search__btn btn " + (props.requiredData ? "" : "disabled")} value="Поиск" />
             <span>* Обязательные к заполнению поля</span>
         </div>

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import DocItem from "./../elements/DocItem";
-import documents from "./../../api/documents";
-
 
 function News(props) {
 
@@ -14,15 +12,13 @@ function News(props) {
         setPosts(props.posts);
     });
 
-
     if (posts === null) return;
 
     const postsStore = JSON.parse(localStorage.getItem('posts'));
-    // console.log(postsStore);
     postList = postsStore.map((el, index) => {
         return <DocItem key={index} el={el.ok} />
     })
-
+    
     return (
         <div className={"res__news " + (props.usePreloader ? 'hide' : "")}>
             <h2 className="res__news-sub-title sub-title">Список документов</h2>

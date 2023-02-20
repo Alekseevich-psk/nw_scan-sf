@@ -10,7 +10,6 @@ export default function getPostsInit(data, status) {
         data.items.forEach(element => {
             idsArr.push(element.encodedId);
         });
-        console.log(data);
     }
 
     if (idsArr.length >= 11) {
