@@ -25,13 +25,13 @@ class Search extends React.Component {
             //     dateEnd: "2023-02-02",
             // },
             checkBoxValues: null,
-            // checkBoxValues: {
-            //     maxFullness: true,
-            //     inBusinessNews: true,
-            //     onlyMainRole: true,
-            //     advertisement: true,
-            //     isDigest: true,
-            // },
+            checkBoxValues: {
+                maxFullness: true,
+                inBusinessNews: true,
+                onlyMainRole: true,
+                advertisement: true,
+                isDigest: true,
+            },
             requiredData: false,
             redirectResPage: false
         }

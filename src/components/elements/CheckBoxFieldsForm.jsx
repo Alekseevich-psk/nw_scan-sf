@@ -16,6 +16,10 @@ class CheckBoxFieldsForm extends React.Component {
 
     }
 
+    componentDidMount() {
+        this.props.getCheckBoxValue(this.state);
+    }
+
     onChange(e) {
         const state = this.state;
         for (const key in state) {

@@ -1,5 +1,3 @@
-// import React, { useState, useEffect } from "react";
-
 export default function Options(props) {
 
     function onChangeValue(e) {
@@ -8,7 +6,7 @@ export default function Options(props) {
 
     return (
         <div className="search__item">
-            <label htmlFor="inn" className="search__label label">Тональность</label>
+            <label htmlFor="inn" className="search__label label">Тональность *</label>
             <select
                 onChange={onChangeValue}
                 className="search__options">
