@@ -16,20 +16,28 @@ export default function InputDate(props) {
                 start: e.target.value
             }));
 
-            validate(e.target.value, date.end);
-            props.getInputValue(e.target.value, 'start-date');
+            let error = validate(e.target.value, date.end);
+            if (error) {
+                props.getInputValue(null, 'start-date');
+            } else {
+                props.getInputValue(e.target.value, 'start-date');
+            }
+
         }
 
         if (e.target.classList.contains('input--date-end')) {
-            props.getInputValue(e.target.value, 'start-end');
 
             setDate(prevState => ({
                 ...prevState,
                 end: e.target.value
             }));
 
-            validate(date.start, e.target.value);
-            props.getInputValue(e.target.value, 'start-end');
+            let error = validate(date.start, e.target.value);
+            if (error) {
+                props.getInputValue(null, 'end-date');
+            } else {
+                props.getInputValue(e.target.value, 'end-date');
+            }
         }
 
     }
@@ -39,20 +47,21 @@ export default function InputDate(props) {
         const today = formatDate(new Date());
 
         for (let i = 0; i < res.length; i++) {
+
             if (res[i] > today) {
                 setError(true);
                 setTextError('даты не должны быть в будущем времени');
-                return;
+                return true;
             } else {
                 setError(false);
             }
 
         }
 
-
         if (valueStart > valueEnd) {
             setError(true);
             setTextError('дата начала не может быть позже даты конца');
+            return true;
         } else {
             setError(false);
         }

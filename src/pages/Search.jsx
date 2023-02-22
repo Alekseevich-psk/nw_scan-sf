@@ -42,9 +42,7 @@ class Search extends React.Component {
         this.setState({
             requiredData: status
         })
-
         if (!status) return;
-
         this.setState({
             inputValues: obj
         })

@@ -44,7 +44,7 @@ class InputFieldsForm extends React.Component {
                 inputValues.dateStart = value;
                 break;
 
-            case 'start-end':
+            case 'end-date':
                 inputValues.dateEnd = value;
                 break;
 
