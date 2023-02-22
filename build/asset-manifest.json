@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c921ca76.css",
+    "main.js": "/static/js/main.133778b8.js",
+    "static/media/bg-main.svg": "/static/media/bg-main.4bc087ca71d993c5c3ac.svg",
+    "static/media/bg-found.svg": "/static/media/bg-found.fe947776a816c731209a.svg",
+    "static/media/bg-auth.svg": "/static/media/bg-auth.581e035627778b2fbd58.svg",
+    "static/media/bg-why-me.svg": "/static/media/bg-why-me.1c7d297fb0669aaadda6.svg",
+    "static/media/bg-found-2.svg": "/static/media/bg-found-2.81e790c1f2973433f3b4.svg",
+    "static/media/ferry_black.woff": "/static/media/ferry_black.7b27ec5e38052ecfcfdd.woff",
+    "static/media/ferry_black.woff2": "/static/media/ferry_black.f062842de6ba7ad9cbe5.woff2",
+    "static/media/ico-lock.svg": "/static/media/ico-lock.7c3331add24f4bf297cd.svg",
+    "static/media/ico-facebook.svg": "/static/media/ico-facebook.eea348a3b364cf1ab862.svg",
+    "static/media/ico-ok-item.svg": "/static/media/ico-ok-item.a6fef54fc6b099c406e2.svg",
+    "static/media/ico-google.svg": "/static/media/ico-google.e60df5a8d359f518781a.svg",
+    "static/media/ico-ya.svg": "/static/media/ico-ya.34a30aa57c4303815183.svg",
+    "index.html": "/index.html",
+    "main.c921ca76.css.map": "/static/css/main.c921ca76.css.map",
+    "main.133778b8.js.map": "/static/js/main.133778b8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c921ca76.css",
+    "static/js/main.133778b8.js"
+  ]
+}
