@@ -1,10 +1,10 @@
-import documents from "../api/documents";
+import documents from "../API/documents";
 
 export default function getPostsInit(data, status) {
     let idsArr = [];
 
 
-    if (status == 'newPost') {
+    if (status === 'newPost') {
         idsArr = data;
     } else {
         data.items.forEach(element => {

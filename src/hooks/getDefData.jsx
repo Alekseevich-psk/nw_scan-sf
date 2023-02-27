@@ -1,4 +1,4 @@
-import histograms from '../api/histograms';
+import histograms from '../API/histograms';
 
 export default function getDefData() {
 

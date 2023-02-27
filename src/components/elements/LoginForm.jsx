@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import login from "../../api/login.js";
+import login from "../../API/login.js";
 import { Navigate } from 'react-router-dom';
 
 class LoginForm extends React.Component {
@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
     }
 
     handleChange(e) {
-        (e.target.value == '') ? this.setState({ disabledBtn: true }) : this.setState({ disabledBtn: false });
+        (e.target.value === '') ? this.setState({ disabledBtn: true }) : this.setState({ disabledBtn: false });
     }
 
     handleClick(e) {

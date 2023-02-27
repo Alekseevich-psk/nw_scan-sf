@@ -2,7 +2,7 @@ import React from "react";
 import { HashLink } from 'react-router-hash-link';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import profileInfo from "../../api/profileInfo";
+import profileInfo from "../../API/profileInfo";
 import MiniPreloader from "./MiniPreloader";
 
 class Header extends React.Component {
